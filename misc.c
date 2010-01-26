@@ -544,6 +544,12 @@ calculate_position(panel *np, int distance)
     screen  = gdk_display_get_screen(display,0);
 
     monitorGeometry = (GdkRectangle*) malloc(sizeof(GdkRectangle));
+
+    if (np->monitor >= gdk_screen_get_n_monitors(screen)) {
+        np->monitor = 0;
+        ERR("trayer: monitor parameter isn't valid, reseting value to 0\n");
+    }
+
     gdk_screen_get_monitor_geometry(screen,np->monitor,monitorGeometry);
     
     sswidth  = monitorGeometry->width - 1; 
