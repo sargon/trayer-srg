@@ -558,6 +558,8 @@ calculate_position(panel *np, int distance)
     minx = monitorGeometry->x;
     miny = monitorGeometry->y;
 
+    free(monitorGeometry);
+
 
     if (np->edge == EDGE_TOP || np->edge == EDGE_BOTTOM) {
         np->aw = np->width;
