@@ -1,0 +1,17 @@
+Installation:
+
+1. Default way
+Most users (99.99%) should use this way :-)
+
+    ./confugire
+    make
+    su -
+    make install
+
+2. Litle customization
+Run  ./configure --help to see supported options, then goto step 1
+
+
+
+  
+

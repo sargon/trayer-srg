@@ -1,0 +1,39 @@
+ifeq (,$(TOPDIR))
+$(error TOPDIR variable must be defined)
+endif
+
+all:
+
+$(TOPDIR)/Makefile.config:
+	$(error Please run $(TOPDIR)/configure first)
+
+ifneq ($(MAKECMDGOALS),clean)
+ifneq ($(MAKECMDGOALS),distclean)
+ifneq ($(MAKECMDGOALS),tar)
+-include $(TOPDIR)/Makefile.config
+endif
+endif
+endif
+
+CC = gcc
+LIBS = $(shell pkg-config --libs gtk+-2.0 gdk-pixbuf-2.0 gdk-pixbuf-xlib-2.0) -L/usr/X11R6/lib  -lXmu
+INCS = $(shell pkg-config --cflags gtk+-2.0 gdk-pixbuf-2.0 gdk-pixbuf-xlib-2.0)
+CFLAGS = -O2    # overwriten by command line or env. variable
+CFLAGS += -Wall # always nice to have 
+ifneq (,$(DEVEL))
+CFLAGS := -g -Wall 
+endif
+
+# -DGTK_DISABLE_DEPRECATED does not work yet
+CFLAGS += -DG_DISABLE_DEPRECATED -DGDK_DISABLE_DEPRECATED
+
+%.o: %.c
+	$(CC) $(CFLAGS) $(INCS) -c $<
+
+%.dep: %.c
+	$(CC) $(CFLAGS) $(INCS) -MM $< -o $@
+
+.PHONY: all clean distclean install uninstall
+
+distclean: clean
+install: all

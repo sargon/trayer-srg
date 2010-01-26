@@ -1,0 +1,24 @@
+Thanks goes to:
+- Grzegorz Niewêg³owski <hoppke@dobremiasto.net> - code extraction from
+  fbpanel
+- Rafal Bisingier <ravbc@man.poznan.pl> - conversion of configuration using
+  ~/.fbpanel/* files to commandline options
+- Thomas Rydzynski - added new option 'distance'
+
+fbpanel credits follow
+-----------------------------------------------------------------------------
+I'd like to thank to GNOME project. I learn a lot from its code
+and some pieces were used in fbpanel. Correct for version 3.0,
+systray code and wm icon code were copied from GNOME
+
+Credits to all people who contributed by writing code and solving
+bugs. 
+	Joe MacDonald  <joeythesaint at users.sourceforge.net>
+	Jens Georg     <phako at users.sourceforge.net>
+	and others
+	
+Credits and lot of thanks to Peter Zelezny <zed@linuxpower.org>
+an author of fspanel (see http://www.chatjunkies.org/fspanel/
+                       or http://freshmeat.net/projects/fspanel/)
+The first version of fBpanel was started as hacking around fSpanel :-)
+

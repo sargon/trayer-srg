@@ -1,0 +1,61 @@
+                        trayer
+
+NAME
+        trayer is a lightweight GTK2-based systray for UNIX desktop
+
+SYNOPSYS
+        trayer [OPTION]...
+
+DESCRIPTION
+	trayer is small program designed to provide systray functionality present
+	in GNOME/KDE desktop enviroments for window managers wchich doesn't
+	support that function. It's similar to other applications such as
+	'peksystray' and 'docker'.
+
+	trayer code was extracted from fbpanel application, you can find more
+	about it on it's homepage: http://fbpanel.sourceforge.net/
+
+	You can find new versions of trayer and support on FVWM-Crystal
+	project homepage: http://fvwm-crystal.berlios.de/
+
+OPTIONS
+        -h			- prints help message and exits
+        -v			- prints version and exits
+	--edge			- screen edge to use <left|right|top|bottom>
+	--align			- alignment <left|center|right>
+	--margin		- length of margin in pixels
+	--distance		- space between trayer's window and screen
+				  edge
+	--widthtype		- how panel width is calculated:
+				  request - follow widgets' size requests. can shrink
+				  	    or grow dynamically
+				  pixel	  - ocupy fixed number of pixels, then 'width'
+				  	    variable holds a number
+				  percent - be 'width' precent of an edge
+	--width			- width of a panel (not used with --widthtype=request)
+	--heighttype		- how panel height is calcilated:
+				  pixel   - ocupy fixed number of pixels, then 'height'
+				  	    variable holds a number
+	--height		- height of a panel in pixels
+	--SetDockTpe		- Identify panel window type as dock <true|false>
+	--SetPartialStrut	- Reserve panel's space so that it will not be covered
+				  by maximazied windows <true|false>
+	--transparent		- use transparency <true|false>
+	--tint			- color used to "tint" background wallpaper
+				  with
+	--alpha			- pocentage of transparency <0-256>
+	--expand		- specifies if trayer can accomodate extra
+				  space or not <true|false>
+	--padding		- extra space between trayer's window frame
+				  and docked icons
+    --monitor       - define the mointor on which you like
+                  trayer to appear, number of zero to number
+                  of monitors minus one
+	
+AUTHORS
+	Maciej Delmanowski <harnir@users.berlios.de>
+    Anatoly Asviyan <aanatoly@users.sf.net> - fbpanel
+    Daniel Ehlers - monitor 
+ 
+
+

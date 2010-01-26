@@ -1,0 +1,118 @@
+trayer changelog
+
+1.0
+* tray code extracted from the main fbpanel sources
+* configuration using config file changed into command-line options
+* positionx and positiony options removed
+* distance option added
+
+-----------------------------------------------------------------------------
+fbpanel changes follow
+-----------------------------------------------------------------------------
+3.8
+* warnings clean-up
+* X11 memory leacher was fixed
+* taskbar can be set to show only mapped/iconified and wins from other desktops
+* transparency initial support
+* gtkbar was ported to gtk2, so fbpanel is compiled with GTK_DISABLE_DEPRECETED
+* initial dll support
+
+3.7
+* rounded corners (optional)
+* taskbar view fix
+
+3.6
+* taskbar icon size fix
+* menu icon size fix
+* pager checks for drawable pixmap
+
+3.5
+* Drag-n-Drop for launchbar
+* menu plugin
+* removed limith for max task size in taskbar
+
+3.4 
+* gtk2.2 linkage fix
+* strut fix
+* launchbar segfault on wrong config fix
+* '&' at the end of action var in launchbar config is depreciated
+
+3.3
+* taskbar icon size fix
+
+3.2
+* scroll mouse in pager changes desktops
+* packaging and makefiles now are ready for system wide install
+  additionally ./configure was implemented
+* systray checks for another tray already running
+
+3.1
+* improving icon quility in taskbar
+* system tray (aka notification area) support
+* NET_WM_STRUT_PARTIAL and NET_WM_STRUT were implmented
+* taskbar update icon image on every icon change
+
+3.0
+* official version bump :-)
+
+3.0-rc-1
+* porting to GTK2+. port is based on phako's patch
+  "[ 678749 ] make it compile and work with gtk2"
+  
+
+2.2
+* support for XEmbed docklets via gtktray utility
+
+2.1
+* tray plugin was written
+* documentation update
+* web site update
+
+2.0 
+* complete engine rewrite
+* new plugin API
+* pager fixes
+
+1.4
+* bug-fixes for pager plugin
+
+1.3
+* middle-click in taskbar will toggle shaded state of a window
+* added image plugin - this is simple plugin that just shows an image
+* pager eye-candy fixes
+* close_module function update
+
+1.2
+* we've got new module - pager! Yeeaa-Haa!!
+* segfault on wrong config file was fixed
+
+1.1
+* parsing engine was rewritten
+* modules' static variables were converted to mallocs
+* configurable size and postion of a panel
+* ability to specify what modules to load
+* '~' is accepted in config files
+* 
+
+
+1.0
+* 1.0-rc2 was released as 1.0
+
+1.0-rc2
+* taskbar config file was added an option to switch tooltips on/off
+* added tooltips to taskbar (thanks to Joe MacDonald joe@deserted.net)
+
+1.0-rc1
+* copyright comments were changed
+
+1.0-rc0
+* added _NET_WM_STRUT support
+* panel now is unfocusable. this fixes iconify bug under sawfish
+* panel's height is calculated at run-time, instead of fixed 22 
+
+0.11
+* improved EWMH/NETWM support
+* added openbox support
+* added clock customization (thanks to Tooar tooar@gmx.net)
+* README was rewrited
+* bug fixes
