@@ -1,7 +1,7 @@
                         trayer
 
 NAME
-        trayer is a lightweight GTK2-based systray for UNIX desktop
+        trayer-srg is a lightweight GTK2-based systray for UNIX desktop
 
 SYNOPSYS
         trayer [OPTION]...
@@ -12,11 +12,17 @@ DESCRIPTION
 	support that function. It's similar to other applications such as
 	'peksystray' and 'docker'.
 
+    trayer-srg was forked from trayer in january 2010 to add some
+    fancy features and clean up code.
+    
 	trayer code was extracted from fbpanel application, you can find more
 	about it on it's homepage: http://fbpanel.sourceforge.net/
 
 	You can find new versions of trayer and support on FVWM-Crystal
 	project homepage: http://fvwm-crystal.berlios.de/
+
+    You can find code of trayer-srg on his github page:
+    http://github.com/sargon/trayer-srg
 
 OPTIONS
         -h			- prints help message and exits
@@ -55,7 +61,7 @@ OPTIONS
 AUTHORS
 	Maciej Delmanowski <harnir@users.berlios.de>
     Anatoly Asviyan <aanatoly@users.sf.net> - fbpanel
-    Daniel Ehlers - monitor 
+    Daniel Ehlers - multi monitor support
  
 
 
