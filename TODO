@@ -1,0 +1,17 @@
+TODO 
+====
+
+ REDUCE
+ ------
+ + remove plugin handling
+   why plugin handling when we always load
+   only one, not changing, plugin, which serve 
+   the main functionality
+ + clean up code
+
+
+ FANCY
+ -----
+ + background color selectable
+ + (code) documentation
+   - increase maintainbility
