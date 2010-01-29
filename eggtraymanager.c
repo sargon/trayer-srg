@@ -24,6 +24,7 @@
 #include <gtk/gtkwindow.h>
 #include "eggtraymanager.h"
 #include "eggmarshalers.h"
+#include "panel.h"
 
 /* Signals */
 enum
