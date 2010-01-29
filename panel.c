@@ -488,6 +488,12 @@ panel_parse_global(panel *p)
     RET(1);
 }
 
+/** 
+ * Initialise systray functionality.
+ *
+ * @param panel panel  the panel struct
+ * @return int if successful 1 else 0
+ */
 static int panel_systray(panel *panel){
     ENTER;
 
