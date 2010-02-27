@@ -398,9 +398,15 @@ panel_start_gui(panel *p)
     if (p->round_corners)
         make_round_corners(p);
 
+    if (p->allign == ALLIGN_RIGHT) {
+        GtkWidget * expander = p->my_box_new(FALSE, 0);
+        gtk_box_pack_start(GTK_BOX(p->lbox), expander, TRUE, TRUE, 0);
+        gtk_widget_show(expander);
+    }
+
     p->box = p->my_box_new(FALSE, 1);
     gtk_container_set_border_width(GTK_CONTAINER(p->box), 1);
-    gtk_box_pack_start(GTK_BOX(p->lbox), p->box, TRUE, TRUE, 0);
+    gtk_box_pack_start(GTK_BOX(p->lbox), p->box, FALSE, TRUE, 0);
     gtk_widget_show(p->box);
 
     p->topxwin = GDK_WINDOW_XWINDOW(GTK_WIDGET(p->topgwin)->window);
