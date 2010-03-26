@@ -494,22 +494,6 @@ panel_parse_global(panel *p)
     RET(1);
 }
 
-/** 
- * Initialise systray functionality.
- *
- * @param panel panel  the panel struct
- * @return int if successful 1 else 0
- */
-static int panel_systray(panel *panel){
-    ENTER;
-	
-    if (!tray_constructor(panel)) {
-        RET(0);
-    }
-
-    RET(1);
-}
-
 int
 panel_start(panel *p)
 {
@@ -522,7 +506,7 @@ panel_start(panel *p)
     if (!panel_parse_global(p))
         RET(0);
 
-    if (!panel_systray(p))
+    if (!tray_constructor(p))
         RET(0);
 
     gtk_widget_show_all(p->topgwin);
