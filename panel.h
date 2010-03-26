@@ -55,7 +55,6 @@ typedef struct {
     int plug_num;
 
     // Import from plugin structure
-    GtkWidget    *pwid;
     gpointer     priv; 
     int expand;
     int padding;

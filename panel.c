@@ -502,16 +502,10 @@ panel_parse_global(panel *p)
  */
 static int panel_systray(panel *panel){
     ENTER;
-
-    panel->pwid = gtk_event_box_new();
-    gtk_box_pack_start(GTK_BOX(panel->box), panel->pwid, panel->expand, TRUE,
-          panel->padding);
-    
+	
     if (!tray_constructor(panel)) {
-        gtk_widget_destroy(panel->pwid);
         RET(0);
     }
-    gtk_widget_show(panel->pwid);
 
     RET(1);
 }
