@@ -53,8 +53,12 @@ typedef struct {
     int wa_len;
 
     int plug_num;
-    GList *plugins;
-    
+
+    // Import from plugin structure
+    GtkWidget    *pwid;
+    gpointer     priv; 
+    int expand;
+    int padding;
 } panel;
 
 

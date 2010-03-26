@@ -3,16 +3,17 @@ TODO
 
  REDUCE
  ------
- + remove plugin handling
-   why plugin handling when we always load
-   only one, not changing, plugin, which serve 
-   the main functionality
+ + remove remaining plugin overhead
+   after plugin loading/handling code is removed
+   the next step is to remove gtk code needed by 
+   plugin behavior
  + clean up code
 
 
  FANCY
  -----
  + background color selectable
+ + review image resizing 
  + (code) documentation
    - increase maintainbility
  + tray icon rendering

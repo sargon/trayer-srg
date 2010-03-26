@@ -5,24 +5,10 @@ include $(TOPDIR)/Makefile.common
 
 # Part 1
 # recursive make
-.PHONY: subdirs
-all clean distclean install uninstall: subdirs
 
-SUBDIRS = systray
-.PHONY: $(SUBDIRS)
-subdirs: $(SUBDIRS)
-$(SUBDIRS):
-	$(MAKE) -C $@ $(MAKECMDGOALS)
-
-
-
-SRC = panel.c misc.c plugin.c gtkbar.c bg.c 
+SRC = panel.c misc.c bg.c egg-marshal.c  eggtraymanager.c  fixedtip.c main.c 
 OBJ = $(SRC:%.c=%.o)
 DEP = $(SRC:%.c=%.dep)
-
-SYSTRAYOBJ = systray/systray.o
-SYSTRAYOBJ: systray
-
 
 ifneq ($(MAKECMDGOALS),clean)
 ifneq ($(MAKECMDGOALS),distclean)
@@ -34,8 +20,8 @@ endif
 
 
 TARGET = trayer
-$(TARGET): $(OBJ) $(SYSTRAYOBJ)
-	$(CC) $(LDFLAGS) $(LIBS) $(OBJ) $(SYSTRAYOBJ) -o $@
+$(TARGET): $(OBJ) 
+	$(CC) $(LDFLAGS) $(LIBS) $(OBJ) -o $@
 ifeq (,$(DEVEL))
 	strip $@
 endif

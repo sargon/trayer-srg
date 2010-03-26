@@ -10,10 +10,10 @@
 #include <string.h>
 #include <signal.h>
 
-#include "plugin.h"
 #include "panel.h"
 #include "misc.h"
 #include "bg.h"
+#include "main.h"
 
 /* do not change this line - Makefile's 'tar' target depends on it */
 #define VERSION "1.0"
@@ -362,12 +362,11 @@ panel_start_gui(panel *p)
     XWMHints wmhints;
     unsigned int val;
 
-
+    
     ENTER;
     //gtk_rc_parse_string(transparent_rc);
     p->topgwin =  gtk_window_new(GTK_WINDOW_TOPLEVEL);
-    // TOOD set color
-    //gtk_widget_modify_bg(p->topgwin,GTK_STATE_NORMAL,color)
+
     gtk_container_set_border_width(GTK_CONTAINER(p->topgwin), 0);
     gtk_window_set_resizable(GTK_WINDOW(p->topgwin), FALSE);
     gtk_window_set_wmclass(GTK_WINDOW(p->topgwin), "panel", "trayer");
@@ -399,9 +398,15 @@ panel_start_gui(panel *p)
     if (p->round_corners)
         make_round_corners(p);
 
+    if (p->allign == ALLIGN_RIGHT) {
+        GtkWidget * expander = p->my_box_new(FALSE, 0);
+        gtk_box_pack_start(GTK_BOX(p->lbox), expander, TRUE, TRUE, 0);
+        gtk_widget_show(expander);
+    }
+
     p->box = p->my_box_new(FALSE, 1);
     gtk_container_set_border_width(GTK_CONTAINER(p->box), 1);
-    gtk_box_pack_start(GTK_BOX(p->lbox), p->box, TRUE, TRUE, 0);
+    gtk_box_pack_start(GTK_BOX(p->lbox), p->box, FALSE, TRUE, 0);
     gtk_widget_show(p->box);
 
     p->topxwin = GDK_WINDOW_XWINDOW(GTK_WIDGET(p->topgwin)->window);
@@ -489,44 +494,27 @@ panel_parse_global(panel *p)
     RET(1);
 }
 
-static int
-panel_parse_plugin(panel *p)
-{
-    plugin *plug = NULL;
-    FILE *tmpfp;
-
+/** 
+ * Initialise systray functionality.
+ *
+ * @param panel panel  the panel struct
+ * @return int if successful 1 else 0
+ */
+static int panel_systray(panel *panel){
     ENTER;
-    if (!(tmpfp = tmpfile())) {
-        ERR( "can't open temporary file with tmpfile()\n");
+
+    panel->pwid = gtk_event_box_new();
+    gtk_box_pack_start(GTK_BOX(panel->box), panel->pwid, panel->expand, TRUE,
+          panel->padding);
+    
+    if (!tray_constructor(panel)) {
+        gtk_widget_destroy(panel->pwid);
         RET(0);
     }
+    gtk_widget_show(panel->pwid);
 
-    if (!(plug = plugin_load("tray"))) {
-        ERR( "trayer: can't load systray\n" );
-        goto error;
-    }
-    plug->panel = p;
-    plug->fp = tmpfp;
-    plug->expand = expand;
-    plug->padding = padding;
-    fprintf(tmpfp, "}\n");
-    fseek(tmpfp, 0, SEEK_SET);
-    if (!plugin_start(plug)) {
-        ERR( "trayer: can't start systray\n" );
-        goto error;
-    }
-    DBG("systray\n");
-    p->plugins = g_list_append(p->plugins, plug);
     RET(1);
-
- error:
-    fclose(tmpfp);
-    if (plug)
-          plugin_put(plug);
-    RET(0);
-
 }
-
 
 int
 panel_start(panel *p)
@@ -540,7 +528,7 @@ panel_start(panel *p)
     if (!panel_parse_global(p))
         RET(0);
 
-    if (!panel_parse_plugin(p))
+    if (!panel_systray(p))
         RET(0);
 
     gtk_widget_show_all(p->topgwin);
@@ -548,30 +536,17 @@ panel_start(panel *p)
     RET(1);
 }
 
-static void
-delete_plugin(gpointer data, gpointer udata)
-{
-    ENTER;
-    plugin_stop((plugin *)data);
-    plugin_put((plugin *)data);
-    RET();
-
-}
-
 void panel_stop(panel *p)
 {
     ENTER;
 
-    g_list_foreach(p->plugins, delete_plugin, NULL);
-    g_list_free(p->plugins);
-    p->plugins = NULL;
+    tray_destructor(p);
     XSelectInput (GDK_DISPLAY(), GDK_ROOT_WINDOW(), NoEventMask);
     gdk_window_remove_filter(gdk_get_default_root_window (), (GdkFilterFunc)panel_wm_events, p);
     gtk_widget_destroy(p->topgwin);
     g_free(p->workarea);
     RET();
 }
-
 
 void
 usage()
