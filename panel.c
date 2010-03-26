@@ -44,14 +44,6 @@ static gchar *transparent_rc = "style 'transparent-style'\n"
 "class \"GtkBox\" style \"transparent-style\"\n"
 "\n";
 
-
-/*
-"class \"GtkBox\" style \"transparent-style\"\n"
-"class \"GtkContainer\" style \"transparent-style\"\n"
-"class \"GtkBin\" style \"transparent-style\"\n"
-"class \"GtkSeparator\" style \"transparent-style\"\n"
-*/
-
 static void set_bg(GtkWidget *widget, panel *p);
 
 /****************************************************
@@ -594,16 +586,6 @@ handle_error(Display * d, XErrorEvent * ev)
     ERR( "trayer : X error: %s\n", buf);
     RET();
 }
-
-/*
-static void
-sig_usr(int signum)
-{
-    if (signum != SIGUSR1)
-        return;
-    gtk_main_quit();
-}
-*/
 
 int
 main(int argc, char *argv[], char *env[])
