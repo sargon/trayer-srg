@@ -20,7 +20,6 @@
 
 static gchar *cfgfile = NULL;
 static gchar version[] = VERSION;
-static gchar *cprofile = "default";
 int distance=0;
 int expand=1 , padding=0;
 
@@ -397,6 +396,7 @@ panel_start_gui(panel *p)
     }
 
     p->box = p->my_box_new(FALSE, 1);
+	// TODO set border in relation of mode
     gtk_container_set_border_width(GTK_CONTAINER(p->box), 1);
     gtk_box_pack_start(GTK_BOX(p->lbox), p->box, FALSE, TRUE, 0);
     gtk_widget_show(p->box);
@@ -404,6 +404,13 @@ panel_start_gui(panel *p)
     p->topxwin = GDK_WINDOW_XWINDOW(GTK_WIDGET(p->topgwin)->window);
 
     bg_init(GDK_DISPLAY());
+
+	GdkColor* bgColor = (GdkColor*) malloc(sizeof(GdkColor));
+	bgColor->blue = 65535;
+	bgColor->red  = 0;
+	bgColor->green = 0;
+	
+	gtk_widget_modify_bg(p->topgwin,GTK_STATE_ACTIVE,bgColor);
 
     /* make our window unfocusable */
     wmhints.flags = InputHint;
@@ -542,40 +549,8 @@ usage()
     printf(" --expand <false|true>\n");
     printf(" --padding <number>\n");
     printf(" --monitor <number>\n");
-    /*printf(" -p <name> -- use named profile. File ~/.trayer/<name> must exist\n");
-    printf("\nVisit http://fbpanel.sourceforge.net/ for detailed documentation,\n");
-    printf("sample profiles and other stuff.\n\n");*/
 }
-
-FILE *
-open_profile(gchar *profile)
-{
-    gchar *fname;
-    FILE *fp;
-
-    ENTER;
-    fname = g_strdup_printf("%s/.trayer/%s", getenv("HOME"), profile);
-    if ((fp = fopen(fname, "r"))) {
-        cfgfile = fname;
-        ERR("Using %s\n", fname);
-        RET(fp);
-    }
-    ERR("Can't load %s\n", fname);
-    g_free(fname);
-
-    /* check private configuration directory */
-    fname = g_strdup_printf("%s/share/trayer/%s", PREFIX, profile);
-    if ((fp = fopen(fname, "r"))) {
-        cfgfile = fname;
-        ERR("Using %s\n", fname);
-        RET(fp);
-    }
-    ERR("Can't load %s\n", fname);
-    g_free(fname);
-    ERR("Can't open '%s' profile\n", profile);
-    RET(NULL);
-}
-
+    
 void
 handle_error(Display * d, XErrorEvent * ev)
 {
@@ -627,15 +602,6 @@ main(int argc, char *argv[], char *env[])
 /*
         } else if (!strcmp(argv[i], "--verbose")) {
             verbose = 1;
-        } else if (!strcmp(argv[i], "--profile") || !strcmp(argv[i], "-p")) {
-            i++;
-            if (i == argc) {
-                ERR( "trayer: missing profile name\n");
-                usage();
-                exit(1);
-            } else {
-                cprofile = g_strdup(argv[i]);
-            }
 */
         } else if (!strcmp(argv[i], "--edge")) {
             i++;
