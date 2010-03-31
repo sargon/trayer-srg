@@ -552,7 +552,7 @@ calculate_position(panel *np, int distance)
 
     gdk_screen_get_monitor_geometry(screen,np->monitor,monitorGeometry);
     
-    sswidth  = monitorGeometry->width - 1; 
+    sswidth  = monitorGeometry->width; 
     ssheight = monitorGeometry->height;
 
     minx = monitorGeometry->x;

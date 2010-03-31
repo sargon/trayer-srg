@@ -80,25 +80,25 @@ panel_set_wm_strut(panel *p)
         i = 0;
         data[i] = p->aw;
         data[4 + i*2] = p->ay;
-        data[5 + i*2] = p->ay + p->ah;
+        data[5 + i*2] = p->ay + p->ah - 1;
         break;
     case EDGE_RIGHT:
         i = 1;
         data[i] = p->aw;
         data[4 + i*2] = p->ay;
-        data[5 + i*2] = p->ay + p->ah;
+        data[5 + i*2] = p->ay + p->ah - 1;
         break;
     case EDGE_TOP:
         i = 2;
         data[i] = p->ah;
         data[4 + i*2] = p->ax;
-        data[5 + i*2] = p->ax + p->aw;
+        data[5 + i*2] = p->ax + p->aw - 1;
         break;
     case EDGE_BOTTOM:
         i = 3;
         data[i] = p->ah;
         data[4 + i*2] = p->ax;
-        data[5 + i*2] = p->ax + p->aw;
+        data[5 + i*2] = p->ax + p->aw - 1 ;
         break;
     default:
         ERR("wrong edge %d. strut won't be set\n", p->edge);
