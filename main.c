@@ -88,7 +88,7 @@ tray_constructor(panel *p)
     tr->mainw = gtk_alignment_new (0.5, 0.5, 1.0, 1.0);
     tr->box = p->my_box_new(FALSE, 1);
     gtk_container_add (GTK_CONTAINER (tr->mainw), tr->box);
-    gtk_container_add(GTK_CONTAINER(p->pwid), tr->mainw);
+    gtk_container_add(GTK_CONTAINER(p->box), tr->mainw);
     
     screen = gtk_widget_get_screen (GTK_WIDGET (p->topgwin));
     

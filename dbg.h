@@ -5,7 +5,7 @@
 #define ENTER2          do { fprintf(stderr, "%s:%-5d: ENTER\n", __FUNCTION__, __LINE__); } while(0)
 #define RET2(args...)   do { fprintf(stderr, "%s:%-5d: RETURN\n", __FUNCTION__, __LINE__);\
 return args; } while(0)
-#define DBG
+//#define DBG
 #ifdef DBG
 
 #define ENTER          do { fprintf(stderr, "%s:%-5d: ENTER\n", __FUNCTION__, __LINE__); } while(0)
