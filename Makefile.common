@@ -16,7 +16,7 @@ endif
 endif
 
 CC = gcc
-LIBS = $(shell pkg-config --libs gtk+-2.0 gdk-pixbuf-2.0 gdk-pixbuf-xlib-2.0) -L/usr/X11R6/lib  -lXmu
+LIBS = $(shell pkg-config --libs gtk+-2.0 gdk-pixbuf-2.0 gdk-pixbuf-xlib-2.0) -lX11 -L/usr/X11R6/lib  -lXmu
 INCS = $(shell pkg-config --cflags gtk+-2.0 gdk-pixbuf-2.0 gdk-pixbuf-xlib-2.0)
 CFLAGS = -O2    # overwriten by command line or env. variable
 CFLAGS += -Wall # always nice to have 
