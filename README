@@ -21,6 +21,10 @@ DESCRIPTION
 	You can find new versions of trayer and support on FVWM-Crystal
 	project homepage: http://fvwm-crystal.berlios.de/
 
+	There is also a debian maintained version of trayer, you
+	can find the mercurial repository on:
+	http://hg.debian.org/hg/collab-maint/trayer
+
 	You can find code of trayer-srg on his github page:
 	http://github.com/sargon/trayer-srg
 
@@ -32,6 +36,8 @@ OPTIONS
 	--margin		- length of margin in pixels
 	--distance		- space between trayer's window and screen
 				  edge
+	--distancefrom  - Specifies which edge to calculate distance from, see 
+				  above.
 	--widthtype		- how panel width is calculated:
 				  request - follow widgets' size requests. can shrink
 				  	    or grow dynamically
@@ -63,7 +69,7 @@ AUTHORS
 	Anatoly Asviyan <aanatoly@users.sf.net> - fbpanel
 	Rafal Bisingier <ravbc@man.poznan.pl> - conversion of configuration using  ~/.fbpanel/* files to commandline options
 	Grzegorz Niewêg³owski <hoppke@dobremiasto.net> - code extraction from fbpanel
-    Thomas Rydzynski - added new option 'distance'
+	Thomas Rydzynski - added new option 'distance'
 	Keegan Carruthers-Smith <keegan.csmith@gmail.com> - fix align 
 	Yury Akudovich - added new option distancefrom option
 	Jens Peter Secher <jps@debian.org> - various (debian trayer fork)
