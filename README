@@ -64,6 +64,7 @@ AUTHORS
 	Rafal Bisingier <ravbc@man.poznan.pl> - conversion of configuration using  ~/.fbpanel/* files to commandline options
 	Grzegorz Niewêg³owski <hoppke@dobremiasto.net> - code extraction from fbpanel
     Thomas Rydzynski - added new option 'distance'
+	Keegan Carruthers-Smith <keegan.csmith@gmail.com> - fix align 
 	Yury Akudovich - added new option distancefrom option
 	Jens Peter Secher <jps@debian.org> - various (debian trayer fork)
 	Daniel Ehlers - multi monitor support, code cleanup
