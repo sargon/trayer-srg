@@ -60,8 +60,10 @@ OPTIONS
 	
 AUTHORS
 	Maciej Delmanowski <harnir@users.berlios.de>
-    Anatoly Asviyan <aanatoly@users.sf.net> - fbpanel
-	Daniel Ehlers - multi monitor support
- 
-
-
+	Anatoly Asviyan <aanatoly@users.sf.net> - fbpanel
+	Rafal Bisingier <ravbc@man.poznan.pl> - conversion of configuration using  ~/.fbpanel/* files to commandline options
+	Grzegorz Niewêg³owski <hoppke@dobremiasto.net> - code extraction from fbpanel
+    Thomas Rydzynski - added new option 'distance'
+	Yury Akudovich - added new option distancefrom option
+	Jens Peter Secher <jps@debian.org> - various (debian trayer fork)
+	Daniel Ehlers - multi monitor support, code cleanup
