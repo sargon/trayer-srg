@@ -74,6 +74,15 @@ pair edge_pair[] = {
     { 0, NULL },
 };
 
+pair distancefrom_pair[] = {
+    { DISTANCEFROM_NONE, "none" },
+    { DISTANCEFROM_LEFT, "left" },
+    { DISTANCEFROM_RIGHT, "right" },
+    { DISTANCEFROM_TOP, "top" },
+    { DISTANCEFROM_BOTTOM, "bottom" },
+    { 0, NULL },
+};
+
 pair width_pair[] = {
     { WIDTH_NONE, "none" },
     { WIDTH_REQUEST, "request" },
@@ -531,9 +540,9 @@ calculate_width(int scrw, int wtype, int allign, int margin,
 
 
 void
-calculate_position(panel *np, int distance)
+calculate_position(panel *np, int distance,int distancefrom)
 {
-    int sswidth, ssheight, minx, miny;
+    int sswidth, ssheight, minx, miny, distancex, distancey;
     GdkScreen *screen;
     GdkDisplay *display;
     GdkRectangle *monitorGeometry;
@@ -559,27 +568,34 @@ calculate_position(panel *np, int distance)
     miny = monitorGeometry->y;
 
     free(monitorGeometry);
-
+    
+    if (distancefrom == DISTANCEFROM_TOP || distancefrom == DISTANCEFROM_BOTTOM) {
+        distancex = 0;
+        distancey = (distancefrom == DISTANCEFROM_TOP) ? distance : -distance;
+    } else {
+        distancex = (distancefrom == DISTANCEFROM_LEFT) ? distance : -distance;
+        distancey = 0;
+    }
 
     if (np->edge == EDGE_TOP || np->edge == EDGE_BOTTOM) {
         np->aw = np->width;
-        np->ax = minx;
+        np->ax = minx + distancex;
         calculate_width(sswidth, np->widthtype, np->allign, np->margin,
               &np->aw, &np->ax);
         np->ah = np->height;
         np->ah = MIN(PANEL_HEIGHT_MAX, np->ah);
         np->ah = MAX(PANEL_HEIGHT_MIN, np->ah);
-        np->ay = miny + ((np->edge == EDGE_TOP) ? 0+distance : (ssheight - np->ah - distance));
+        np->ay = miny + ((np->edge == EDGE_TOP) ? distancey : (ssheight - np->ah - distancey));
 
     } else {
         np->ah = np->width;
-        np->ay = miny;
+        np->ay = miny + distancey;
         calculate_width(ssheight, np->widthtype, np->allign, np->margin,
               &np->ah, &np->ay);
         np->aw = np->height;
         np->aw = MIN(PANEL_HEIGHT_MAX, np->aw);
         np->aw = MAX(PANEL_HEIGHT_MIN, np->aw);
-        np->ax = minx + ((np->edge == EDGE_LEFT) ? 0+distance : (sswidth - np->aw - distance));
+        np->ax = minx + ((np->edge == EDGE_LEFT) ? distancex : (sswidth - np->aw - distancex));
     }
     DBG("%s - x=%d y=%d w=%d h=%d\n", __FUNCTION__, np->ax, np->ay, np->aw, np->ah);
     RET();

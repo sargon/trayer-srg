@@ -20,7 +20,7 @@
 
 static gchar *cfgfile = NULL;
 static gchar version[] = VERSION;
-int distance=0;
+int distance=0, distancefrom=0;
 int expand=1 , padding=0;
 
 
@@ -198,7 +198,7 @@ panel_size_req(GtkWidget *widget, GtkRequisition *req, panel *p)
         p->width = (p->orientation == ORIENT_HORIZ) ? req->width : req->height;
     if (p->heighttype == HEIGHT_REQUEST)
         p->height = (p->orientation == ORIENT_HORIZ) ? req->height : req->width;
-    calculate_position(p, distance);
+    calculate_position(p, distance,distancefrom);
     req->width  = p->aw;
     req->height = p->ah;
     DBG("OUT req=(%d, %d)\n", req->width, req->height);
@@ -215,7 +215,7 @@ panel_size_alloc(GtkWidget *widget, GtkAllocation *a, panel *p)
         p->width = (p->orientation == ORIENT_HORIZ) ? a->width : a->height;
     if (p->heighttype == HEIGHT_REQUEST)
         p->height = (p->orientation == ORIENT_HORIZ) ? a->height : a->width;
-    calculate_position(p, distance);
+    calculate_position(p, distance,distancefrom);
     DBG("pref alloc: size (%d, %d). pos (%d, %d)\n", p->aw, p->ah, p->ax, p->ay);
     if (a->width == p->aw && a->height == p->ah && a->x == p->ax && a->y == p ->ay) {
         DBG("actual coords eq to preffered. just returning\n");
@@ -452,7 +452,7 @@ panel_start_gui(panel *p)
     */
     gdk_window_add_filter(gdk_get_default_root_window (), (GdkFilterFunc)panel_wm_events, p);
 
-    calculate_position(p, distance);
+    calculate_position(p, distance,distancefrom);
     gdk_window_move_resize(p->topgwin->window, p->ax, p->ay, p->aw, p->ah);
     if (p->setstrut)
         panel_set_wm_strut(p);
@@ -546,6 +546,7 @@ usage()
     printf(" --alpha <number>\n");
     printf(" --tint <int>\n");
     printf(" --distance <number>\n");
+    printf(" --distancefrom <number>\n");
     printf(" --expand <false|true>\n");
     printf(" --padding <number>\n");
     printf(" --monitor <number>\n");
@@ -728,6 +729,15 @@ main(int argc, char *argv[], char *env[])
                 exit(1);
             } else {
                 distance = atoi(argv[i]);
+            }
+        } else if (!strcmp(argv[i], "--distancefrom")) {
+            i++;
+            if (i == argc) {
+                ERR( "trayer: missing distancefrom parameter value\n");
+                usage();
+                exit(1);
+            } else {
+                distancefrom = str2num(distancefrom_pair, argv[i], DISTANCEFROM_NONE);
             }
         } else if (!strcmp(argv[i], "--expand")) {
             i++;
