@@ -20,7 +20,7 @@
 
 static gchar *cfgfile = NULL;
 static gchar version[] = VERSION;
-int distance=0, distancefrom=0;
+int distance=0, distancefrom=DISTANCEFROM_TOP;
 int expand=1 , padding=0;
 
 
