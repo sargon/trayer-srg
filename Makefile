@@ -6,7 +6,7 @@ include $(TOPDIR)/Makefile.common
 # Part 1
 # recursive make
 
-SRC = panel.c misc.c bg.c egg-marshal.c  eggtraymanager.c  fixedtip.c main.c 
+SRC = panel.c misc.c bg.c egg-marshal.c  eggtraymanager.c  fixedtip.c main.c gdk-helper.c
 OBJ = $(SRC:%.c=%.o)
 DEP = $(SRC:%.c=%.dep)
 

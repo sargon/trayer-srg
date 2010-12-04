@@ -14,6 +14,7 @@
 #include "misc.h"
 #include "bg.h"
 #include "main.h"
+#include "gdk-helper.h"
 
 /* do not change this line - Makefile's 'tar' target depends on it */
 #define VERSION "1.0"
@@ -52,8 +53,8 @@ static void set_bg(GtkWidget *widget, panel *p);
 static void
 panel_del_wm_strut(panel *p)
 {
-    XDeleteProperty(GDK_DISPLAY(), p->topxwin, a_NET_WM_STRUT);
-    XDeleteProperty(GDK_DISPLAY(), p->topxwin, a_NET_WM_STRUT_PARTIAL);
+    XDeleteProperty(gdk_display(), p->topxwin, a_NET_WM_STRUT);
+    XDeleteProperty(gdk_display(), p->topxwin, a_NET_WM_STRUT_PARTIAL);
 }
 */
 
@@ -98,10 +99,10 @@ panel_set_wm_strut(panel *p)
     DBG("type %d. width %d. from %d to %d\n", i, data[i], data[4 + i*2], data[5 + i*2]);
 
     /* if wm supports STRUT_PARTIAL it will ignore STRUT */
-    XChangeProperty(GDK_DISPLAY(), p->topxwin, a_NET_WM_STRUT_PARTIAL,
+    XChangeProperty(gdk_display(), p->topxwin, a_NET_WM_STRUT_PARTIAL,
           XA_CARDINAL, 32, PropModeReplace,  (unsigned char *) data, 12);
     /* old spec, for wms that do not support STRUT_PARTIAL */
-    XChangeProperty(GDK_DISPLAY(), p->topxwin, a_NET_WM_STRUT,
+    XChangeProperty(gdk_display(), p->topxwin, a_NET_WM_STRUT,
           XA_CARDINAL, 32, PropModeReplace,  (unsigned char *) data, 4);
 
     RET();
@@ -295,7 +296,7 @@ set_bg(GtkWidget *widget, panel *p)
     ENTER;
     /*
     if (p->xtopbg != None)
-        XFreePixmap(GDK_DISPLAY(), p->xtopbg);
+        XFreePixmap(gdk_display(), p->xtopbg);
     p->xtopbg = bg_new_for_win(p->topxwin);
     if (p->gtopbg)
         g_object_unref(G_OBJECT(p->gtopbg));
@@ -403,7 +404,7 @@ panel_start_gui(panel *p)
 
     p->topxwin = GDK_WINDOW_XWINDOW(GTK_WIDGET(p->topgwin)->window);
 
-    bg_init(GDK_DISPLAY());
+    bg_init(gdk_display());
 
 	GdkColor* bgColor = (GdkColor*) malloc(sizeof(GdkColor));
 	bgColor->blue = 65535;
@@ -415,10 +416,10 @@ panel_start_gui(panel *p)
     /* make our window unfocusable */
     wmhints.flags = InputHint;
     wmhints.input = 0;
-    XSetWMHints (GDK_DISPLAY(), p->topxwin, &wmhints);
+    XSetWMHints (gdk_display(), p->topxwin, &wmhints);
     if (p->setdocktype) {
         state[0] = a_NET_WM_WINDOW_TYPE_DOCK;
-        XChangeProperty(GDK_DISPLAY(), p->topxwin, a_NET_WM_WINDOW_TYPE, XA_ATOM,
+        XChangeProperty(gdk_display(), p->topxwin, a_NET_WM_WINDOW_TYPE, XA_ATOM,
               32, PropModeReplace, (unsigned char *) state, 1);
     }
 
@@ -426,8 +427,8 @@ panel_start_gui(panel *p)
 
 #define WIN_HINTS_SKIP_FOCUS      (1<<0)	/* "alt-tab" skips this win */
     val = WIN_HINTS_SKIP_FOCUS;
-    XChangeProperty(GDK_DISPLAY(), p->topxwin,
-          XInternAtom(GDK_DISPLAY(), "_WIN_HINTS", False), XA_CARDINAL, 32,
+    XChangeProperty(gdk_display(), p->topxwin,
+          XInternAtom(gdk_display(), "_WIN_HINTS", False), XA_CARDINAL, 32,
           PropModeReplace, (unsigned char *) &val, 1);
 
     Xclimsg(p->topxwin, a_NET_WM_DESKTOP, 0xFFFFFFFF, 0, 0, 0, 0);
@@ -440,14 +441,14 @@ panel_start_gui(panel *p)
     state[0] = a_NET_WM_STATE_SKIP_PAGER;
     state[1] = a_NET_WM_STATE_SKIP_TASKBAR;
     state[2] = a_NET_WM_STATE_STICKY;
-    XChangeProperty(GDK_DISPLAY(), p->topxwin, a_NET_WM_STATE, XA_ATOM,
+    XChangeProperty(gdk_display(), p->topxwin, a_NET_WM_STATE, XA_ATOM,
           32, PropModeReplace, (unsigned char *) state, 3);
 
 
 
-    XSelectInput (GDK_DISPLAY(), GDK_ROOT_WINDOW(), PropertyChangeMask);
+    XSelectInput (gdk_display(), GDK_ROOT_WINDOW(), PropertyChangeMask);
     /*
-      XSelectInput (GDK_DISPLAY(), topxwin, PropertyChangeMask | FocusChangeMask |
+      XSelectInput (gdk_display(), topxwin, PropertyChangeMask | FocusChangeMask |
       StructureNotifyMask);
     */
     gdk_window_add_filter(gdk_get_default_root_window (), (GdkFilterFunc)panel_wm_events, p);
@@ -518,7 +519,7 @@ void panel_stop(panel *p)
     ENTER;
 
     tray_destructor(p);
-    XSelectInput (GDK_DISPLAY(), GDK_ROOT_WINDOW(), NoEventMask);
+    XSelectInput (gdk_display(), GDK_ROOT_WINDOW(), NoEventMask);
     gdk_window_remove_filter(gdk_get_default_root_window (), (GdkFilterFunc)panel_wm_events, p);
     gtk_widget_destroy(p->topgwin);
     g_free(p->workarea);
@@ -558,7 +559,7 @@ handle_error(Display * d, XErrorEvent * ev)
     char buf[256];
 
     ENTER;
-    XGetErrorText(GDK_DISPLAY(), ev->error_code, buf, 256);
+    XGetErrorText(gdk_display(), ev->error_code, buf, 256);
     ERR( "trayer : X error: %s\n", buf);
     RET();
 }
