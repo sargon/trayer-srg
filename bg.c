@@ -149,8 +149,6 @@ modify_drawable(GdkDrawable *base, GdkGC *gc, guint32 tintcolor, gint alpha)
 #ifdef TRANSPARENCY
 
 #include <gdk/gdkwindow.h>
-//#include <gdk/gdkinternals.h>
-#include <gdk/gdk.h>		/* For gdk_rectangle_union() */
 #include <gdk/gdkpixmap.h>
 #include <gdk/gdkdrawable.h>
 #include <gdk/gdkpixmap.h>
