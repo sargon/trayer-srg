@@ -555,12 +555,12 @@ egg_tray_manager_get_child_title (EggTrayManager *manager,
   child_window = g_object_get_data (G_OBJECT (child),
 				    "egg-tray-child-window");
 
-  utf8_string = XInternAtom (gdk_display (), "UTF8_STRING", False);
-  atom = XInternAtom (gdk_display (), "_NET_WM_NAME", False);
+  utf8_string = XInternAtom (gdk_helper_display(), "UTF8_STRING", False);
+  atom = XInternAtom (gdk_helper_display(), "_NET_WM_NAME", False);
 
   gdk_error_trap_push ();
 
-  result = XGetWindowProperty (gdk_display (),
+  result = XGetWindowProperty (gdk_helper_display(),
 			       *child_window,
 			       atom,
 			       0, G_MAXLONG,
