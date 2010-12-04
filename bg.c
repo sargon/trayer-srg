@@ -58,8 +58,9 @@ bg_new_for_win(Window win)
     Window dummy;
     Pixmap bgpix;
     GdkPixmap *gbgpix;
-    int  width, height ;
-    int  border, depth, x, y ;
+    unsigned int width, height ;
+    unsigned int  border, depth;
+    int x, y;
 
     ENTER;
     XGetGeometry(dpy, win, &dummy, &x, &y, &width, &height, &border, &depth);
