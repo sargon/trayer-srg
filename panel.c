@@ -19,7 +19,6 @@
 /* do not change this line - Makefile's 'tar' target depends on it */
 #define VERSION "1.0"
 
-static gchar *cfgfile = NULL;
 static gchar version[] = VERSION;
 int distance=0, distancefrom=DISTANCEFROM_TOP;
 int expand=1 , padding=0;
