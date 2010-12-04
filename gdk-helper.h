@@ -1,3 +1,3 @@
 #include <gdk/gdkx.h>
 
-Display* gdk_display();
+Display* gdk_helper_display();
