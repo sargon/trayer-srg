@@ -124,17 +124,8 @@ panel_set_wm_strut(panel *p)
 
 static void print_wmdata(panel *p)
 {
-    int i;
-
     ENTER;
     DBG("desktop %d/%d\n", p->curdesk, p->desknum);
-    DBG("workarea\n");
-    for (i = 0; i < p->wa_len/4; i++)
-        DBG("(%d, %d) x (%d, %d)\n",
-              p->workarea[4*i + 0],
-              p->workarea[4*i + 1],
-              p->workarea[4*i + 2],
-              p->workarea[4*i + 3]);
     RET();
 }
 
@@ -171,7 +162,6 @@ panel_wm_events(GdkXEvent *xevent, GdkEvent *event, panel *p)
             DBG("a_XROOTPMAP_ID\n");
   	  } else if (at == a_NET_WORKAREA) {
             DBG("A_NET_WORKAREA\n");
-            p->workarea = get_xaproperty (GDK_ROOT_WINDOW(), a_NET_WORKAREA, XA_CARDINAL, &p->wa_len);
             print_wmdata(p);
       }
     }
@@ -255,7 +245,6 @@ set_bg(GtkWidget *widget, panel *p)
         g_object_unref(p->gtopbg);
     p->gtopbg = bg_new_for_win(p->topxwin);
 
-
     modify_drawable(p->gtopbg, p->topgwin->style->black_gc, p->tintcolor, p->alpha);
 
     gdk_window_set_back_pixmap(p->topgwin->window, p->gtopbg, FALSE);
@@ -295,37 +284,23 @@ panel_configure_event(GtkWidget *widget, GdkEventConfigure *event, panel *p)
 void
 panel_start_gui(panel *p)
 {
-    GdkAtom state[3];
-    XWMHints wmhints;
-    unsigned int val;
-
-    
     ENTER;
     //gtk_rc_parse_string(transparent_rc);
     p->topgwin      = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-    
-    if(p->topGdkWindow == NULL) fprintf(stderr,"panic");
 
     gtk_container_set_border_width(GTK_CONTAINER(p->topgwin), 0);
     gtk_window_set_resizable(GTK_WINDOW(p->topgwin), FALSE);
     gtk_window_set_wmclass(GTK_WINDOW(p->topgwin), "panel", "trayer");
     gtk_window_set_title(GTK_WINDOW(p->topgwin), "panel");
-    g_signal_connect(G_OBJECT(p->topgwin), "delete-event",
-          G_CALLBACK(panel_delete_event), p);
-    g_signal_connect(G_OBJECT(p->topgwin), "destroy-event",
-          G_CALLBACK(panel_destroy_event), p);
-    g_signal_connect (G_OBJECT (p->topgwin), "size-request",
-          (GCallback) panel_size_req, p);
-    g_signal_connect (G_OBJECT (p->topgwin), "size-allocate",
-          (GCallback) panel_size_alloc, p);
+    g_signal_connect ( G_OBJECT(p->topgwin) , "delete-event" , G_CALLBACK(panel_delete_event) , p);
+    g_signal_connect ( G_OBJECT(p->topgwin) , "destroy-event", G_CALLBACK(panel_destroy_event), p);
+    g_signal_connect ( G_OBJECT (p->topgwin), "size-request" , G_CALLBACK(panel_size_req)  , p);
+    g_signal_connect ( G_OBJECT (p->topgwin), "size-allocate", G_CALLBACK(panel_size_alloc), p);
 
     if (p->transparent) {
-        g_signal_connect (G_OBJECT (p->topgwin), "configure-event",
-              (GCallback) panel_configure_event, p);
-
-        g_signal_connect (G_OBJECT (p->topgwin), "style-set",
-              (GCallback) panel_style_set, p);
-    }
+      g_signal_connect (G_OBJECT (p->topgwin), "configure-event", G_CALLBACK(panel_configure_event), p);
+      g_signal_connect (G_OBJECT (p->topgwin), "style-set", G_CALLBACK( panel_style_set), p);
+    } 
     gtk_widget_realize(p->topgwin);
     gdk_window_set_decorations(p->topgwin->window, 0);
     gtk_widget_set_app_paintable(p->topgwin, TRUE);
@@ -352,8 +327,6 @@ panel_start_gui(panel *p)
     p->topxwin = GDK_WINDOW_XWINDOW(GTK_WIDGET(p->topgwin)->window);
 
     bg_init(gdk_helper_display());
-
-	  gtk_widget_modify_bg(p->topgwin,GTK_STATE_ACTIVE,bgColor);
 
     /* make our window unfocusable */
     gdk_window_set_accept_focus(p->topGdkWindow,False);
@@ -415,9 +388,8 @@ panel_parse_global(panel *p)
         else if (p->height > PANEL_HEIGHT_MAX)
             p->height = PANEL_HEIGHT_MAX;
     }
-    p->curdesk = get_net_current_desktop();
-    p->desknum = get_net_number_of_desktops();
-    p->workarea = get_xaproperty (GDK_ROOT_WINDOW(), a_NET_WORKAREA, XA_CARDINAL, &p->wa_len);
+    p->curdesk  = get_net_current_desktop();
+    p->desknum  = get_net_number_of_desktops();
     print_wmdata(p);
     panel_start_gui(p);
     RET(1);
@@ -451,7 +423,6 @@ void panel_stop(panel *p)
     XSelectInput (gdk_helper_display(), GDK_ROOT_WINDOW(), NoEventMask);
     gdk_window_remove_filter(gdk_get_default_root_window (), (GdkFilterFunc)panel_wm_events, p);
     gtk_widget_destroy(p->topgwin);
-    g_free(p->workarea);
     RET();
 }
 

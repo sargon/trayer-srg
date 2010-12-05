@@ -50,7 +50,6 @@ typedef struct {
     
     int desknum;
     int curdesk;
-    unsigned int *workarea;
     int wa_len;
 
     int plug_num;
