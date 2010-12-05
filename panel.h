@@ -24,6 +24,7 @@ enum { POS_NONE, POS_START, POS_END };
 typedef struct {
 
     GtkWidget *topgwin;           /* main panel window */
+    GdkWindow* topGdkWindow;      // and it parent gdk window  
     Window topxwin;               /* and it X window   */
     GtkWidget *lbox;              /* primary layout box */
     GtkWidget *box;               /* box that contains all plugins */
