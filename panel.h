@@ -45,7 +45,6 @@ typedef struct {
     int self_destroy : 1;
     int setdocktype : 1;
     int setstrut : 1;
-    int round_corners : 1;
     int transparent : 1;
     int monitor;
     

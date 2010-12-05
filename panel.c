@@ -246,67 +246,11 @@ panel_size_alloc(GtkWidget *widget, GtkAllocation *a, panel *p)
 /****************************************************
  *         panel creation                           *
  ****************************************************/
-static void
-make_round_corners(panel *p)
-{
-    GtkWidget *b1, *b2, *img;
-    GtkWidget *(*box_new) (gboolean, gint);
-    void (*box_pack)(GtkBox *, GtkWidget *, gboolean, gboolean, guint);
-    gchar *s1, *s2;
-#define IMGPREFIX  PREFIX "/share/trayer/images/"
 
-    ENTER;
-    if (p->edge == EDGE_TOP) {
-        s1 = IMGPREFIX "top-left.xpm";
-        s2 = IMGPREFIX "top-right.xpm";
-    } else if (p->edge == EDGE_BOTTOM) {
-        s1 = IMGPREFIX "bottom-left.xpm";
-        s2 = IMGPREFIX "bottom-right.xpm";
-    } else if (p->edge == EDGE_LEFT) {
-        s1 = IMGPREFIX "top-left.xpm";
-        s2 = IMGPREFIX "bottom-left.xpm";
-    } else if (p->edge == EDGE_RIGHT) {
-        s1 = IMGPREFIX "top-right.xpm";
-        s2 = IMGPREFIX "bottom-right.xpm";
-    } else
-        RET();
-
-    box_new = (p->orientation == ORIENT_HORIZ) ? gtk_vbox_new : gtk_hbox_new;
-    b1 = box_new(0, FALSE);
-    gtk_widget_show(b1);
-    b2 = box_new(0, FALSE);
-    gtk_widget_show(b2);
-
-    box_pack = (p->edge == EDGE_TOP || p->edge == EDGE_LEFT) ?
-        gtk_box_pack_start : gtk_box_pack_end;
-
-    img = gtk_image_new_from_file(s1);
-    gtk_widget_show(img);
-    box_pack(GTK_BOX(b1), img, FALSE, FALSE, 0);
-    img = gtk_image_new_from_file(s2);
-    gtk_widget_show(img);
-    box_pack(GTK_BOX(b2), img, FALSE, FALSE, 0);
-    gtk_box_pack_start(GTK_BOX(p->lbox), b1, FALSE, FALSE, 0);
-    gtk_box_pack_end(GTK_BOX(p->lbox), b2, FALSE, FALSE, 0);
-    RET();
-}
-
-static void
+  static void
 set_bg(GtkWidget *widget, panel *p)
 {
     ENTER;
-    /*
-    if (p->xtopbg != None)
-        XFreePixmap(gdk_helper_display(), p->xtopbg);
-    p->xtopbg = bg_new_for_win(p->topxwin);
-    if (p->gtopbg)
-        g_object_unref(G_OBJECT(p->gtopbg));
-    p->gtopbg = gdk_xid_table_lookup (p->xtopbg);
-    if (p->gtopbg)
-        g_object_ref (G_OBJECT (p->gtopbg));
-    else
-        p->gtopbg = gdk_pixmap_foreign_new (p->xtopbg);
-    */
     if (p->gtopbg)
         g_object_unref(p->gtopbg);
     p->gtopbg = bg_new_for_win(p->topxwin);
@@ -390,8 +334,6 @@ panel_start_gui(panel *p)
     gtk_container_set_border_width(GTK_CONTAINER(p->lbox), 0);
     gtk_container_add(GTK_CONTAINER(p->topgwin), p->lbox);
     gtk_widget_show(p->lbox);
-    if (p->round_corners)
-        make_round_corners(p);
 
     if (p->allign == ALLIGN_RIGHT) {
         GtkWidget * expander = p->my_box_new(FALSE, 0);
@@ -576,7 +518,6 @@ main(int argc, char *argv[], char *env[])
     p->height = PANEL_HEIGHT_DEFAULT;
     p->setdocktype = 1;
     p->setstrut = 0;
-    p->round_corners = 0;
     p->transparent = 0;
     p->alpha = 127;
     p->tintcolor = 0xFFFFFFFF;
@@ -674,15 +615,6 @@ main(int argc, char *argv[], char *env[])
                 exit(1);
             } else {
                 p->setstrut = str2num(bool_pair, argv[i], 0);
-            }
-        } else if (!strcmp(argv[i], "--RoundCorners")) {
-            i++;
-            if (i == argc) {
-                ERR( "trayer: missing RoundCorners parameter value\n");
-                usage();
-                exit(1);
-            } else {
-                p->round_corners = str2num(bool_pair, argv[i], 0);
             }
         } else if (!strcmp(argv[i], "--transparent")) {
             i++;
