@@ -122,14 +122,6 @@ panel_set_wm_strut(panel *p)
     RET();
 }
 
-static void print_wmdata(panel *p)
-{
-    ENTER;
-    DBG("desktop %d/%d\n", p->curdesk, p->desknum);
-    RET();
-}
-
-
 static GdkFilterReturn 
 panel_wm_events(GdkXEvent *xevent, GdkEvent *event, panel *p)
 {
@@ -147,12 +139,6 @@ panel_wm_events(GdkXEvent *xevent, GdkEvent *event, panel *p)
     if (win == GDK_ROOT_WINDOW()) {
   	  if (at == a_NET_CLIENT_LIST) {
             DBG("A_NET_CLIENT_LIST\n");
-  	  } else if (at == a_NET_CURRENT_DESKTOP) {
-            p->curdesk = get_net_current_desktop();
-            DBG("A_NET_CURRENT_DESKTOP\n");
-    	} else if (at == a_NET_NUMBER_OF_DESKTOPS) {
-            p->desknum = get_net_number_of_desktops();
-            DBG("A_NET_NUMBER_OF_DESKTOPS\n");
   	  } else if (at == a_NET_ACTIVE_WINDOW) {
             DBG("A_NET_ACTIVE_WINDOW\n");
       } else if (at == a_XROOTPMAP_ID) {
@@ -160,9 +146,6 @@ panel_wm_events(GdkXEvent *xevent, GdkEvent *event, panel *p)
             set_bg(p->topgwin, p);
             gtk_widget_queue_draw(p->topgwin);
             DBG("a_XROOTPMAP_ID\n");
-  	  } else if (at == a_NET_WORKAREA) {
-            DBG("A_NET_WORKAREA\n");
-            print_wmdata(p);
       }
     }
     RET(GDK_FILTER_CONTINUE);
@@ -385,9 +368,6 @@ panel_parse_global(panel *p)
         else if (p->height > PANEL_HEIGHT_MAX)
             p->height = PANEL_HEIGHT_MAX;
     }
-    p->curdesk  = get_net_current_desktop();
-    p->desknum  = get_net_number_of_desktops();
-    print_wmdata(p);
     panel_start_gui(p);
     RET(1);
 }
@@ -408,7 +388,6 @@ panel_start(panel *p)
         RET(0);
 
     gtk_widget_show_all(p->topgwin);
-    print_wmdata(p);
     RET(1);
 }
 

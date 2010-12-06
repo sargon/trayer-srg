@@ -28,10 +28,10 @@ typedef struct {
     Window topxwin;               /* and it X window   */
     GtkWidget *lbox;              /* primary layout box */
     GtkWidget *box;               /* box that contains all plugins */
-    GtkRequisition requisition;
     GtkWidget *(*my_box_new) (gboolean, gint);
     Pixmap xtopbg; 
     GdkPixmap *gtopbg;
+
     int alpha;
     guint32 tintcolor;
     
@@ -47,12 +47,6 @@ typedef struct {
     int transparent : 1;
     int monitor;
     
-    int desknum;
-    int curdesk;
-    int wa_len;
-
-    int plug_num;
-
     // Import from plugin structure
     gpointer     priv; 
     int expand;
