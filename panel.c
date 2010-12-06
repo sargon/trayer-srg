@@ -137,11 +137,7 @@ panel_wm_events(GdkXEvent *xevent, GdkEvent *event, panel *p)
     at = ev->xproperty.atom;
     win = ev->xproperty.window;
     if (win == GDK_ROOT_WINDOW()) {
-  	  if (at == a_NET_CLIENT_LIST) {
-            DBG("A_NET_CLIENT_LIST\n");
-  	  } else if (at == a_NET_ACTIVE_WINDOW) {
-            DBG("A_NET_ACTIVE_WINDOW\n");
-      } else if (at == a_XROOTPMAP_ID) {
+      if (at == a_XROOTPMAP_ID) {
             bg_rootbg_changed();
             set_bg(p->topgwin, p);
             gtk_widget_queue_draw(p->topgwin);
