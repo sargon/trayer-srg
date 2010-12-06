@@ -1,5 +1,10 @@
 trayer changelog
 
+1.1
+* multi monitor support
+* add distancefrom parameter
+* remove plugin handling code / code cleanup
+
 1.0
 * tray code extracted from the main fbpanel sources
 * configuration using config file changed into command-line options
