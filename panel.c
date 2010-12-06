@@ -313,24 +313,19 @@ panel_start_gui(panel *p)
         gdk_window_set_type_hint(p->topGdkWindow,GDK_WINDOW_TYPE_HINT_DOCK);
     }
 
-    //Xclimsg(p->topxwin, a_NET_WM_DESKTOP, 0xFFFFFFFF, 0, 0, 0, 0);
+    Xclimsg(p->topxwin, a_NET_WM_DESKTOP, 0xFFFFFFFF, 0, 0, 0, 0);
 
     /************************/
     /* Window Mapping Point */
     gtk_widget_show_all(p->topgwin);
-    //Xclimsg(p->topxwin, a_NET_WM_DESKTOP, 0xFFFFFFFF, 0, 0, 0, 0);
+    Xclimsg(p->topxwin, a_NET_WM_DESKTOP, 0xFFFFFFFF, 0, 0, 0, 0);
 
     gdk_window_stick                 ( p->topGdkWindow);
     gdk_window_set_skip_pager_hint   ( p->topGdkWindow, True );
     gdk_window_set_skip_taskbar_hint ( p->topGdkWindow, True ); 
 
-
-
     XSelectInput (gdk_helper_display(), GDK_ROOT_WINDOW(), PropertyChangeMask);
-    /*
-      XSelectInput (gdk_helper_display(), topxwin, PropertyChangeMask | FocusChangeMask |
-      StructureNotifyMask);
-    */
+    XSelectInput (gdk_helper_display(), p->topxwin, PropertyChangeMask | FocusChangeMask | StructureNotifyMask);
     gdk_window_add_filter(gdk_get_default_root_window (), (GdkFilterFunc)panel_wm_events, p);
 
     calculate_position(p, distance,distancefrom);
