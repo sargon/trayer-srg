@@ -30,7 +30,6 @@ typedef struct {
     GtkWidget *box;               /* box that contains all plugins */
     GtkRequisition requisition;
     GtkWidget *(*my_box_new) (gboolean, gint);
-    GtkWidget *(*my_separator_new) ();
     Pixmap xtopbg; 
     GdkPixmap *gtopbg;
     int alpha;

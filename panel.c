@@ -317,7 +317,6 @@ panel_start_gui(panel *p)
     }
 
     p->box = p->my_box_new(FALSE, 1);
-	// TODO set border in relation of mode
     gtk_container_set_border_width(GTK_CONTAINER(p->box), 1);
     gtk_box_pack_start(GTK_BOX(p->lbox), p->box, FALSE, TRUE, 0);
     gtk_widget_show(p->box);
@@ -372,10 +371,8 @@ panel_parse_global(panel *p)
         ? ORIENT_HORIZ : ORIENT_VERT;
     if (p->orientation == ORIENT_HORIZ) {
         p->my_box_new = gtk_hbox_new;
-        p->my_separator_new = gtk_vseparator_new;
     } else {
         p->my_box_new = gtk_vbox_new;
-        p->my_separator_new = gtk_hseparator_new;
     }
     if (p->width < 0)
         p->width = 100;
