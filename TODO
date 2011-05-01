@@ -3,10 +3,6 @@ TODO
 
  REDUCE
  ------
- + remove remaining plugin overhead
-   after plugin loading/handling code is removed
-   the next step is to remove gtk code needed by 
-   plugin behavior
  + clean up code
 
 
