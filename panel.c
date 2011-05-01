@@ -99,25 +99,11 @@ panel_set_wm_strut(panel *p)
     }		
     DBG("type %d. width %d. from %d to %d\n", i, data[i], data[4 + i*2], data[5 + i*2]);
 
-    /* if wm supports STRUT_PARTIAL it will ignore STRUT */
-    gdk_property_change(p->topGdkWindow
-                       ,G_NET_WM_STRUT_PARTIAL
-                       ,TYPE_CARDINAL
-                       ,32
-                       ,GDK_PROP_MODE_REPLACE
-                       ,(guchar*) data
-                       ,12
-                       );
-
-     /* old spec, for wms that do not support STRUT_PARTIAL */
-    gdk_property_change(p->topGdkWindow
-                       ,G_NET_WM_STRUT
-                       ,TYPE_CARDINAL
-                       ,32
-                       ,GDK_PROP_MODE_REPLACE
-                       ,(guchar*) data
-                       ,4
-                       );
+    XChangeProperty(gdk_helper_display(), p->topxwin, a_NET_WM_STRUT_PARTIAL,
+                    XA_CARDINAL, 32, PropModeReplace,  (unsigned char *) data, 12);
+   /* old spec, for wms that do not support STRUT_PARTIAL */
+    XChangeProperty(gdk_helper_display(), p->topxwin, a_NET_WM_STRUT,
+                    XA_CARDINAL, 32, PropModeReplace,  (unsigned char *) data, 4);
 
     RET();
 }
