@@ -352,11 +352,8 @@ panel_parse_global(panel *p)
 int
 panel_start(panel *p)
 {
-    line s;
-
     /* parse global section */
     ENTER;
-    s.len = 256;
 
     if (!panel_parse_global(p))
         RET(0);
