@@ -94,6 +94,7 @@ pair width_pair[] = {
 
 pair height_pair[] = {
     { HEIGHT_NONE, "none" },
+    { HEIGHT_REQUEST, "request" },
     { HEIGHT_PIXEL, "pixel" },
     { 0, NULL },
 };

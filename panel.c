@@ -381,23 +381,23 @@ usage()
     printf("Command line options:\n");
     printf(" -h  -- print this help and exit:\n");
     printf(" -v  -- print version and exit:\n");
-    printf(" --edge <left|right|top|bottom|none>\n");
-    printf(" --align <left|right|center>\n");
-    printf(" --margin <number>\n");
-    printf(" --widthtype <request|pixel|percent>\n");
-    printf(" --width <number>\n");
-    printf(" --heighttype <pixel>\n");
-    printf(" --height <number>\n");
-    printf(" --SetDockType <true|false>\n");
-    printf(" --SetPartialStrut <true|false>\n");
-    printf(" --transparent <true|false>\n");
-    printf(" --alpha <number>\n");
-    printf(" --tint <int>\n");
-    printf(" --distance <number>\n");
+    printf(" --edge       <left|right|top|bottom|none> (default:bottom) \n");
+    printf(" --align      <left|right|center>          (default:center)\n");
+    printf(" --margin     <number>\n");
+    printf(" --widthtype  <request|pixel|percent>      (default:percent)\n");
+    printf(" --width      <number>                     (default:100)\n");
+    printf(" --heighttype <request|pixel>              (default:pixel)\n");
+    printf(" --height     <number>                     (default:26)\n");
+    printf(" --SetDockType     <true|false>            (default:true)\n");
+    printf(" --SetPartialStrut <true|false>            (default:false)\n");
+    printf(" --transparent     <true|false>            (default:false)\n");
+    printf(" --alpha      <number>                     (default:127)\n");
+    printf(" --tint       <int>\n");
+    printf(" --distance   <number>\n");
     printf(" --distancefrom <number>\n");
-    printf(" --expand <false|true>\n");
-    printf(" --padding <number>\n");
-    printf(" --monitor <number>\n");
+    printf(" --expand     <false|true>\n");
+    printf(" --padding    <number>\n");
+    printf(" --monitor    <number>                     (default:0)\n");
 }
     
 void
@@ -417,11 +417,11 @@ main(int argc, char *argv[], char *env[])
     int i;
 
     ENTER;
-    setlocale(LC_CTYPE, ""); // TODO is this necessary
+    setlocale(LC_CTYPE, ""); 
     gtk_init(&argc, &argv);
-    XSetLocaleModifiers(""); // TODO is this necessary
-    XSetErrorHandler((XErrorHandler) handle_error); // TODO is this necessary
-    // resolve xatoms - TODO remove if we didn't depend on them anymore
+    XSetLocaleModifiers(""); 
+    XSetErrorHandler((XErrorHandler) handle_error);
+    // resolve xatoms 
     resolve_atoms();
     // resolve GdkAtoms
     gdk_helper_resolve_atoms();
@@ -449,10 +449,6 @@ main(int argc, char *argv[], char *env[])
         } else if (!strcmp(argv[i], "-v") || !strcmp(argv[i], "--version")) {
             printf("trayer %s\n", version);
             exit(0);
-/*
-        } else if (!strcmp(argv[i], "--verbose")) {
-            verbose = 1;
-*/
         } else if (!strcmp(argv[i], "--edge")) {
             i++;
             if (i == argc) {
