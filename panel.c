@@ -423,8 +423,6 @@ main(int argc, char *argv[], char *env[])
     XSetErrorHandler((XErrorHandler) handle_error);
     // resolve xatoms 
     resolve_atoms();
-    // resolve GdkAtoms
-    gdk_helper_resolve_atoms();
 
     p = g_new0(panel, 1);
     memset(p, 0, sizeof(panel));
