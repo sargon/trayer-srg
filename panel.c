@@ -1,5 +1,3 @@
-
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <sys/types.h>
@@ -18,7 +16,6 @@
 #include "main.h"
 #include "gdk-helper.h"
 
-/* do not change this line - Makefile's 'tar' target depends on it */
 #define VERSION "1.1.1"
 
 static gchar version[] = VERSION;
