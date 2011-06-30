@@ -59,7 +59,7 @@ panel_del_wm_strut(panel *p)
 static void
 panel_set_wm_strut(panel *p)
 {
-    unsigned int data[12] = {0,0,0,0,0,0,0,0,0,0,0,0};
+    unsigned long data[12] = {0,0,0,0,0,0,0,0,0,0,0,0};
     int i = 4;
 
     ENTER;
