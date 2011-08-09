@@ -74,4 +74,5 @@ AUTHORS
 	Yury Akudovich - added new option distancefrom option
 	Jens Peter Secher <jps@debian.org> - various (debian trayer fork)
 	Daniel Ehlers - multi monitor support, code cleanup
-  Stu Black - help closing a problem with wrong values in _NET_WM_STRUT_PARTIAL
+	Stu Black - help closing a problem with wrong values in _NET_WM_STRUT_PARTIAL
+	Michael Weber - fix build problems, improvements cmdline parameter handling
