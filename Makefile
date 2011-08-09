@@ -19,7 +19,7 @@ endif
 
 TARGET = trayer
 $(TARGET): $(OBJ) 
-	$(CC) $(LDFLAGS) $(LIBS) $(OBJ) -o $@
+	$(CC) $(LDFLAGS) $(OBJ) -o $@ $(LIBS)
 ifeq (,$(DEVEL))
 	strip $@
 endif
