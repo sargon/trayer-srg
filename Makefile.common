@@ -15,17 +15,13 @@ endif
 endif
 endif
 
-CC = gcc
+CC ?= gcc
 LIBS = $(shell pkg-config --libs gtk+-2.0 gdk-pixbuf-2.0 gdk-pixbuf-xlib-2.0) -lX11 -L/usr/X11R6/lib  -lXmu
 INCS = $(shell pkg-config --cflags gtk+-2.0 gdk-pixbuf-2.0 gdk-pixbuf-xlib-2.0)
-CFLAGS = -O2    # overwriten by command line or env. variable
-CFLAGS += -Wall # always nice to have 
+CFLAGS ?= -O2 -Wall
 ifneq (,$(DEVEL))
-CFLAGS := -g -Wall 
+CFLAGS ?= -g -Wall 
 endif
-
-# -DGTK_DISABLE_DEPRECATED does not work yet
-CFLAGS += -DG_DISABLE_DEPRECATED -DGDK_DISABLE_DEPRECATED
 
 %.o: %.c
 	$(CC) $(CFLAGS) $(INCS) -c $<
