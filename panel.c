@@ -337,10 +337,13 @@ panel_parse_global(panel *p)
         p->width = 100;
     p->heighttype = HEIGHT_PIXEL;
     if (p->heighttype == HEIGHT_PIXEL) {
-        if (p->height < PANEL_HEIGHT_MIN)
+        if (p->height < PANEL_HEIGHT_MIN) {
+	    ERR( "height is bound by %i pixels\n", PANEL_HEIGHT_MIN );
             p->height = PANEL_HEIGHT_MIN;
-        else if (p->height > PANEL_HEIGHT_MAX)
+	} else if (p->height > PANEL_HEIGHT_MAX) {
+	    ERR( "height is bound by %i pixels\n", PANEL_HEIGHT_MAX );
             p->height = PANEL_HEIGHT_MAX;
+	}
     }
     panel_start_gui(p);
     RET(1);
