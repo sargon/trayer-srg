@@ -16,7 +16,7 @@
 #include "main.h"
 #include "gdk-helper.h"
 
-#define VERSION "1.1.1"
+#define VERSION "1.1.3"
 
 static gchar version[] = VERSION;
 int distance=0, distancefrom=DISTANCEFROM_TOP;
