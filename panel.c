@@ -400,7 +400,7 @@ usage()
     printf(" --distancefrom <number>\n");
     printf(" --expand     <false|true>\n");
     printf(" --padding    <number>\n");
-    printf(" --monitor    <number>                     (default:0)\n");
+    printf(" --monitor    <number|primary>             (default:0)\n");
 }
     
 void
@@ -601,7 +601,13 @@ main(int argc, char *argv[], char *env[])
                 usage();
                 exit(1);
             } else {
-                p->monitor = atoi(argv[i]);
+                if (g_ascii_isdigit(argv[i][0])) {
+                    p->monitor = atoi(argv[i]);
+                } else if (!strcmp(argv[i], "primary")) {
+                    GdkDisplay *display = gdk_display_get_default ();
+                    GdkScreen *screen = gdk_display_get_screen(display, 0);
+                    p->monitor = gdk_screen_get_primary_monitor(screen);
+                }
             }
         } else {
             printf("trayer: unknown option - %s\n", argv[i]);
