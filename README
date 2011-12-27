@@ -62,7 +62,7 @@ OPTIONS
 				  and docked icons
 	--monitor       - define the mointor on which you like
 				  trayer to appear, number of zero to number
-				  of monitors minus one
+				  of monitors minus one, or the string "primary".
 	
 AUTHORS
 	Maciej Delmanowski <harnir@users.berlios.de>
@@ -76,3 +76,4 @@ AUTHORS
 	Daniel Ehlers - multi monitor support, code cleanup
 	Stu Black - help closing a problem with wrong values in _NET_WM_STRUT_PARTIAL
 	Michael Weber - fix build problems, improvements cmdline parameter handling
+	Johannes Bittner - primary switch for monitor selection
