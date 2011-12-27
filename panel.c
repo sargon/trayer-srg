@@ -280,7 +280,7 @@ panel_start_gui(panel *p)
 
     p->box = p->my_box_new(FALSE, 1);
     gtk_container_set_border_width(GTK_CONTAINER(p->box), 1);
-    gtk_box_pack_start(GTK_BOX(p->lbox), p->box, FALSE, TRUE, 0);
+    gtk_box_pack_start(GTK_BOX(p->lbox), p->box, FALSE, TRUE, padding);
     gtk_widget_show(p->box);
 
     // get properties on topgwin
