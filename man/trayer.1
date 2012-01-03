@@ -1,0 +1,193 @@
+.TH TRAYER-SRG 1 LOCAL
+.SH NAME
+  trayer-srg - a lightweight GTK2-based systray for UNIX desktop
+.SH SYNOPSYS
+.B trayer 
+.B "[
+.I OPTIONS
+.B "]
+.SH DESCRIPTION
+trayer is small program designed to provide systray functionality present in GNOME/KDE desktop enviroments for window managers which doesn't support that function. It's similar to other applications such as 'peksystray' and 'docker'.
+   
+trayer code was extracted from fbpanel application, you can find more about it on it's homepage: 
+.IB http://fbpanel.sourceforge.net/
+
+You can find new versions of trayer and support on FVWM-Crystal project homepage:
+.IB http://fvwm-crystal.berlios.de/
+
+There is also a debian maintained version of trayer, you can find the mercurial repository on:
+.IB http://hg.debian.org/hg/collab-maint/trayer 
+
+trayer-srg was forked from trayer in january 2010 to add some fancy features and clean up code.
+It contains all changes from above versions as far as known.
+Code of trayer-srg can be found on github:
+.IB http://github.com/sargon/trayer-srg
+.SH OPTIONS
+.TP 
+.BR \-h 
+prints help message and exits 
+.TP 
+.BR \-v
+prints version and exits
+.TP
+.BR \--edge " EDGE" 
+Use 
+.I EDGE
+for orientation. Possible values for
+.I EDGE
+are 
+.BR left, 
+.BR right,
+.BR top,
+.BR bottom
+or 
+.BR none.
+The default value is 
+.BR bottom. 
+.TP
+.BR \--align " ALIGNMENT"
+Orientation of docked icons inside the trayer panel. Possible values are
+.BR left,
+.BR center,
+.BR right,
+or
+.BR none.
+The default value is 
+.BR center.
+.TP
+.BR \--margin " NUM"
+Length of margin in pixels. The default value is 
+.BR 0.
+.TP
+.BR \--distance " NUM"
+Space between trayer's window and screen edge.
+When set to 0 the option has no effect.
+The default value is
+.BR 0.
+.TP
+.BR \--distancefrom " EDGE"
+Specifies which edge to calculate distance from, see 
+.BR --edge.
+The default value is 
+.BR top.
+ When 
+.BR --distance 
+is 0 then this option has no effect.
+.TP
+.BR \--widthtype " TYPE"
+Determine how width is calculated. Possible values for
+.I TYPE
+are 
+.BR pixel,
+.BR percent,
+.BR request
+or
+.BR none.
+The default value is
+.BR percent.
+.TP
+.BR \--width " NUM"
+Width of a panel. When 
+.BR --widthtype=request 
+this option has no effect. The default value is 
+.BR 100.
+.TP
+.BR \--heighttype " TYPE"
+Determine how height is calculated. Possible values for 
+.I TYPE
+are 
+.BR pixel,
+.BR request
+or
+.BR none.
+
+The default value is
+.BR pixel.
+.TP
+.BR \--height " NUM"
+Height of a panel. When 
+.BR --heigthtype=request 
+this option has no effect. The default value is
+.BR 26.
+.TP
+.BR \--SetDockTpe " BOOL"
+Identify panel window type as dock. The default value is
+.BR true.
+.TP
+.BR \--SetPartialStrut " BOOL"
+Reserve panel's space so that it will not be covered by maximazied windows. The
+default value is 
+.BR false.
+.TP
+.BR \--transparent " BOOL"
+Use transparency. Default value is 
+.BR false. 
+.TP
+.BR \--tint " NUM"
+Color used to "tint" background wallpaper with. 
+.I NUM
+is 32bit width hexadecimal number.
+The default value is 
+.BR 0xFFFFFFFF.
+.TP
+.BR \--alpha " NUM"
+Percentage of transparency.
+.I NUM 
+should be a value between 0 and 256. The default value is
+.BR 127.
+.TP
+.BR \--expand " BOOL"
+Specifies if trayer can accomodate extra space or not <true|false>. The default
+value is
+.BR true.
+.TP
+.BR \--padding " NUM"
+Number of extra pixel space between trayer's window frame and docked icons. The
+default value is
+.BR 0.
+.TP
+.BR \--monitor " NUM|STRING"
+Define the monitor on which you like trayer to appear, number of zero to number
+of monitors minus one, or the string "primary" are valid. The default value is
+.BR 0.
+.SH EXAMPLES
+.LP 
+Place trayer to the top right edge of the screen and prevent other fullsize
+windows to overlay it:
+.RS
+.nf
+\f8trayer trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --transparent true\fP
+.fi
+.RE
+.SH BUGS
+Report bugs to the issue tracker:
+.I https://github.com/sargon/trayer-srg/issues
+.SH CONTRIBUTORS
+  Following people are or has been involved in development of trayer-srg:
+
+.IP "Maciej Delmanowski <harnir@users.berlios.de>"
+.IP "Anatoly Asviyan <aanatoly@users.sf.net>
+fbpanel
+.IP "Rafal Bisingier <ravbc@man.poznan.pl>"
+conversion of configuration using  ~/.fbpanel/* files to commandline options
+.IP "Grzegorz Niewêg³owski <hoppke@dobremiasto.net>"
+code extraction from fbpanel
+.IP "Thomas Rydzynski"
+added new option 'distance'
+.IP "Keegan Carruthers-Smith <keegan.csmith@gmail.com>"
+fix align 
+.IP "Yury Akudovich"
+added new option distancefrom option
+.IP "Jens Peter Secher <jps@debian.org>"
+various (debian trayer fork)
+.IP "Daniel Ehlers <danielehlers@mindeye.net>"
+multi monitor support, code cleanup and current maintainer.
+.IP "Stu Black"
+help closing a problem with wrong values in _NET_WM_STRUT_PARTIAL
+.IP "Michael Weber"
+fix build problems, improvements cmdline parameter handling
+.IP "Johannes Bittner"
+primary switch for monitor selection
+
+.SH AUTHOR
+  This man page is written by Daniel Ehlers.
