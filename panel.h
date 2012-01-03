@@ -19,7 +19,7 @@ enum { POS_NONE, POS_START, POS_END };
 #define PANEL_HEIGHT_DEFAULT  26
 #define PANEL_HEIGHT_MAX      200
 #define PANEL_HEIGHT_MIN      2
-
+#define PANEL_WIDTH_DEFAULT   100
 
 typedef struct {
 

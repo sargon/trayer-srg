@@ -386,20 +386,20 @@ usage()
     printf(" -v  -- print version and exit:\n");
     printf(" --edge       <left|right|top|bottom|none> (default:bottom) \n");
     printf(" --align      <left|right|center>          (default:center)\n");
-    printf(" --margin     <number>\n");
+    printf(" --margin     <number>                     (default:0)\n");
     printf(" --widthtype  <request|pixel|percent>      (default:percent)\n");
-    printf(" --width      <number>                     (default:100)\n");
+    printf(" --width      <number>                     (default:100)\n",PANEL_WIDTH_DEFAULT);
     printf(" --heighttype <request|pixel>              (default:pixel)\n");
-    printf(" --height     <number>                     (default:26)\n");
+    printf(" --height     <number>                     (default:%i)\n",PANEL_HEIGHT_DEFAULT);
     printf(" --SetDockType     <true|false>            (default:true)\n");
-    printf(" --SetPartialStrut <true|false>            (default:false)\n");
+    printf(" --SetPartialStrut <true|false>            (default:true)\n");
     printf(" --transparent     <true|false>            (default:false)\n");
     printf(" --alpha      <number>                     (default:127)\n");
-    printf(" --tint       <int>\n");
-    printf(" --distance   <number>\n");
-    printf(" --distancefrom <number>\n");
-    printf(" --expand     <false|true>\n");
-    printf(" --padding    <number>\n");
+    printf(" --tint       <int>                        (default:0xFFFFFFFF)\n");
+    printf(" --distance   <number>                     (default:0)\n"); 
+    printf(" --distancefrom <left|right|top|bottom>    (default:top) \n");
+    printf(" --expand     <false|true>                 (default:true)\n");
+    printf(" --padding    <number>                     (default:0)\n");
     printf(" --monitor    <number|primary>             (default:0)\n");
 }
     
@@ -432,7 +432,7 @@ main(int argc, char *argv[], char *env[])
     p->allign = ALLIGN_CENTER;
     p->edge = EDGE_BOTTOM;
     p->widthtype = WIDTH_PERCENT;
-    p->width = 100;
+    p->width = PANEL_WIDTH_DEFAULT;
     p->heighttype = HEIGHT_PIXEL;
     p->height = PANEL_HEIGHT_DEFAULT;
     p->setdocktype = 1;
@@ -442,6 +442,7 @@ main(int argc, char *argv[], char *env[])
     p->tintcolor = 0xFFFFFFFF;
     p->xtopbg = None;
     p->monitor = 0;
+    p->margin = 0;
 
     for (i = 1; i < argc; i++) {
         if (!strcmp(argv[i], "-h") || !strcmp(argv[i], "--help")) {
