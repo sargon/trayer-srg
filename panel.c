@@ -388,7 +388,7 @@ usage()
     printf(" --align      <left|right|center>          (default:center)\n");
     printf(" --margin     <number>                     (default:0)\n");
     printf(" --widthtype  <request|pixel|percent>      (default:percent)\n");
-    printf(" --width      <number>                     (default:100)\n",PANEL_WIDTH_DEFAULT);
+    printf(" --width      <number>                     (default:%i)\n",PANEL_WIDTH_DEFAULT);
     printf(" --heighttype <request|pixel>              (default:pixel)\n");
     printf(" --height     <number>                     (default:%i)\n",PANEL_HEIGHT_DEFAULT);
     printf(" --SetDockType     <true|false>            (default:true)\n");
