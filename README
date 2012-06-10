@@ -69,17 +69,17 @@ TRAYER IN DISTROS
     http://packages.gentoo.org/package/x11-misc/trayer-srg
 	
 AUTHORS
-	Maciej Delmanowski <harnir@users.berlios.de>
-	Anatoly Asviyan <aanatoly@users.sf.net> - fbpanel
-	Rafal Bisingier <ravbc@man.poznan.pl> - conversion of configuration using  ~/.fbpanel/* files to commandline options
-	Grzegorz Niewêg³owski <hoppke@dobremiasto.net> - code extraction from fbpanel
-	Thomas Rydzynski - added new option 'distance'
-	Keegan Carruthers-Smith <keegan.csmith@gmail.com> - fix align 
-	Yury Akudovich - added new option distancefrom option
-	Jens Peter Secher <jps@debian.org> - various (debian trayer fork)
-	Daniel Ehlers - multi monitor support, code cleanup
-	Stu Black - help closing a problem with wrong values in _NET_WM_STRUT_PARTIAL
-	Michael Weber - fix build problems, improvements cmdline parameter handling
-	Johannes Bittner - primary switch for monitor selection
+  Maciej Delmanowski <harnir@users.berlios.de>
+  Anatoly Asviyan <aanatoly@users.sf.net> - fbpanel
+Rafal Bisingier <ravbc@man.poznan.pl> - conversion of configuration using  ~/.fbpanel/* files to commandline options
+  Grzegorz Niewêg³owski <hoppke@dobremiasto.net> - code extraction from fbpanel
+  Thomas Rydzynski - added new option 'distance'
+  Keegan Carruthers-Smith <keegan.csmith@gmail.com> - fix align 
+  Yury Akudovich - added new option distancefrom option
+  Jens Peter Secher <jps@debian.org> - various (debian trayer fork)
+  Daniel Ehlers - multi monitor support, code cleanup
+  Stu Black - help closing a problem with wrong values in _NET_WM_STRUT_PARTIAL
+  Michael Weber - fix build problems, improvements cmdline parameter handling
+  Johannes Bittner - primary switch for monitor selection
   Vladimir Murzin  - fixing transparency startup problem
   Corey Richardson - Found some default value fuckup
