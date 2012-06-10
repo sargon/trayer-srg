@@ -82,3 +82,4 @@ AUTHORS
 	Michael Weber - fix build problems, improvements cmdline parameter handling
 	Johannes Bittner - primary switch for monitor selection
   Vladimir Murzin  - fixing transparency startup problem
+  Corey Richardson - Found some default value fuckup
