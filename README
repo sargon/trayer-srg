@@ -21,10 +21,6 @@ DESCRIPTION
 	You can find new versions of trayer and support on FVWM-Crystal
 	project homepage: http://fvwm-crystal.berlios.de/
 
-	There is also a debian maintained version of trayer, you
-	can find the mercurial repository on:
-	http://hg.debian.org/hg/collab-maint/trayer
-
 	You can find code of trayer-srg on his github page:
 	http://github.com/sargon/trayer-srg
 
@@ -77,3 +73,4 @@ AUTHORS
 	Stu Black - help closing a problem with wrong values in _NET_WM_STRUT_PARTIAL
 	Michael Weber - fix build problems, improvements cmdline parameter handling
 	Johannes Bittner - primary switch for monitor selection
+  Vladimir Murzin  - fixing transparency startup problem
