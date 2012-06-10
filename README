@@ -7,58 +7,66 @@ SYNOPSYS
         trayer [OPTION]...
 
 DESCRIPTION
-    trayer-srg was forked from trayer in january 2010 to add some
-    fancy features and clean up code.
+  trayer-srg was forked from trayer in january 2010 to add some
+  fancy features and clean up code.
  
-	trayer is small program designed to provide systray functionality present
-	in GNOME/KDE desktop enviroments for window managers wchich doesn't
-	support that function. It's similar to other applications such as
-	'peksystray' and 'docker'.
+  trayer is small program designed to provide systray functionality present
+  in GNOME/KDE desktop enviroments for window managers which doesn't
+  support that function. It's similar to other applications such as
+  'peksystray' and 'docker'.
    
-	trayer code was extracted from fbpanel application, you can find more
-	about it on it's homepage: http://fbpanel.sourceforge.net/
+  trayer code was extracted from fbpanel application, you can find more
+  about it on it's homepage: http://fbpanel.sourceforge.net/
 
-	You can find new versions of trayer and support on FVWM-Crystal
-	project homepage: http://fvwm-crystal.berlios.de/
+  You can find new versions of trayer and support on FVWM-Crystal
+  project homepage: http://fvwm-crystal.berlios.de/
 
-	You can find code of trayer-srg on his github page:
+  You can find code of trayer-srg on his github page:
 	http://github.com/sargon/trayer-srg
 
 OPTIONS
-        -h			- prints help message and exits
-        -v			- prints version and exits
-	--edge			- screen edge to use <left|right|top|bottom>
-	--align			- alignment <left|center|right>
-	--margin		- length of margin in pixels
-	--distance		- space between trayer's window and screen
-				  edge
-	--distancefrom  - Specifies which edge to calculate distance from, see 
-				  above.
-	--widthtype		- how panel width is calculated:
-				  request - follow widgets' size requests. can shrink
-				  	    or grow dynamically
-				  pixel	  - ocupy fixed number of pixels, then 'width'
-				  	    variable holds a number
-				  percent - be 'width' precent of an edge
-	--width			- width of a panel (not used with --widthtype=request)
+  -h			        - prints help message and exits
+  -v			        - prints version and exits
+	--edge			    - screen edge to use <left|right|top|bottom>
+	--align			    - alignment <left|center|right>
+	--margin		    - length of margin in pixels
+	--distance		  - space between trayer's window and screen edge
+	--distancefrom  - Specifies which edge to calculate distance from, see above.
+	--widthtype		  - how panel width is calculated:
+    request - follow widgets' size requests. can shrink or grow dynamically
+		pixel   - ocupy fixed number of pixels, then 'width' variable holds a number
+		percent - be 'width' precent of an edge
+	--width			    - width of a panel (not used with --widthtype=request)
 	--heighttype		- how panel height is calcilated:
-				  pixel   - ocupy fixed number of pixels, then 'height'
-				  	    variable holds a number
-	--height		- height of a panel in pixels
+		pixel   - ocupy fixed number of pixels, then 'height' variable 
+              holds a number
+	--height		    - height of a panel in pixels
 	--SetDockTpe		- Identify panel window type as dock <true|false>
-	--SetPartialStrut	- Reserve panel's space so that it will not be covered
-				  by maximazied windows <true|false>
-	--transparent		- use transparency <true|false>
-	--tint			- color used to "tint" background wallpaper
-				  with
-	--alpha			- pocentage of transparency <0-256>
-	--expand		- specifies if trayer can accomodate extra
-				  space or not <true|false>
-	--padding		- extra space between trayer's window frame
-				  and docked icons
-	--monitor       - define the mointor on which you like
-				  trayer to appear, number of zero to number
-				  of monitors minus one, or the string "primary".
+	--SetPartialStrut	- Reserve panel's space so that it will not be covered by 
+                      maximazied windows <true|false>
+	--transparent   - use transparency <true|false>
+	--tint			    - color used to "tint" background wallpaper with
+	--alpha			    - pocentage of transparency <0-256>
+	--expand		    - specifies if trayer can accomodate extra space 
+                    or not <true|false>
+	--padding		    - extra space between trayer's window frame and docked icons
+	--monitor       - define the mointor on which you like trayer to appear, 
+                    number of zero to number of monitors minus one, 
+                    or the string "primary".
+
+TRAYER IN DISTROS
+
+  debian 
+    git://git.debian.org/git/collab-maint/trayer
+  
+  fedora
+    https://github.com/bryanbickford/trayer    
+
+  archlinux
+    http://github.com/sargon/trayer-srg  
+
+  gentoo
+    http://packages.gentoo.org/package/x11-misc/trayer-srg
 	
 AUTHORS
 	Maciej Delmanowski <harnir@users.berlios.de>
