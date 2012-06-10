@@ -701,8 +701,8 @@ gtk_image_new_from_file_scaled(const gchar *file, gint width,
 		
             img = gtk_image_new_from_pixbuf(pb_scaled);			
 		
-            gdk_pixbuf_unref(pb);
-            gdk_pixbuf_unref(pb_scaled);
+            g_object_unref(pb);
+            g_object_unref(pb_scaled);
 
             RET(img);
         }
