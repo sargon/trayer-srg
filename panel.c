@@ -254,6 +254,7 @@ panel_start_gui(panel *p)
     gtk_window_set_resizable(GTK_WINDOW(p->topgwin), FALSE);
     gtk_window_set_wmclass(GTK_WINDOW(p->topgwin), "panel", "trayer");
     gtk_window_set_title(GTK_WINDOW(p->topgwin), "panel");
+    gtk_window_set_position(GTK_WINDOW(p->topgwin), GTK_WIN_POS_CENTER);
     g_signal_connect ( G_OBJECT(p->topgwin) , "delete-event" , G_CALLBACK(panel_delete_event) , p);
     g_signal_connect ( G_OBJECT(p->topgwin) , "destroy-event", G_CALLBACK(panel_destroy_event), p);
     g_signal_connect ( G_OBJECT (p->topgwin), "size-request" , G_CALLBACK(panel_size_req)  , p);
