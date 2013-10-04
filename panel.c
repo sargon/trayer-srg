@@ -250,6 +250,8 @@ panel_monitors_changed(GdkScreen* s, panel* p)
     p->monitor = gdk_screen_get_primary_monitor(s);
     calculate_position(p, distance,distancefrom);
     gdk_window_move_resize(p->topgwin->window, p->ax, p->ay, p->aw, p->ah);
+    if (p->setstrut)
+        panel_set_wm_strut(p);
     RET(TRUE);
 }
 
