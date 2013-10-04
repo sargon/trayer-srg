@@ -243,6 +243,16 @@ panel_configure_event(GtkWidget *widget, GdkEventConfigure *event, panel *p)
     RET(FALSE);
 }
 
+static gboolean
+panel_monitors_changed(GdkScreen* s, panel* p)
+{
+    ENTER;
+    p->monitor = gdk_screen_get_primary_monitor(s);
+    calculate_position(p, distance,distancefrom);
+    gdk_window_move_resize(p->topgwin->window, p->ax, p->ay, p->aw, p->ah);
+    RET(TRUE);
+}
+
 void
 panel_start_gui(panel *p)
 {
@@ -263,7 +273,15 @@ panel_start_gui(panel *p)
     if (p->transparent) {
       g_signal_connect (G_OBJECT (p->topgwin), "configure-event", G_CALLBACK(panel_configure_event), p);
       g_signal_connect (G_OBJECT (p->topgwin), "style-set", G_CALLBACK( panel_style_set), p);
-    } 
+    }
+
+    if (p->on_primary) {
+        GdkDisplay *display = gdk_display_get_default ();
+        GdkScreen *screen = gdk_display_get_screen(display, 0);
+        g_signal_connect ( screen, "monitors-changed", G_CALLBACK(panel_monitors_changed), (gpointer)p );
+        p->monitor = gdk_screen_get_primary_monitor(screen);
+
+    }
     gtk_widget_realize(p->topgwin);
     gdk_window_set_decorations(p->topgwin->window, 0);
     gtk_widget_set_app_paintable(p->topgwin, TRUE);
@@ -444,6 +462,7 @@ main(int argc, char *argv[], char *env[])
     p->xtopbg = None;
     p->monitor = 0;
     p->margin = 0;
+    p->on_primary = 0;
 
     for (i = 1; i < argc; i++) {
         if (!strcmp(argv[i], "-h") || !strcmp(argv[i], "--help")) {
@@ -606,9 +625,7 @@ main(int argc, char *argv[], char *env[])
                 if (g_ascii_isdigit(argv[i][0])) {
                     p->monitor = atoi(argv[i]);
                 } else if (!strcmp(argv[i], "primary")) {
-                    GdkDisplay *display = gdk_display_get_default ();
-                    GdkScreen *screen = gdk_display_get_screen(display, 0);
-                    p->monitor = gdk_screen_get_primary_monitor(screen);
+                    p->on_primary = 1;
                 }
             }
         } else {
