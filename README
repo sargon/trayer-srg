@@ -71,7 +71,7 @@ TRAYER IN DISTROS
 AUTHORS
   Maciej Delmanowski <harnir@users.berlios.de>
   Anatoly Asviyan <aanatoly@users.sf.net> - fbpanel
-Rafal Bisingier <ravbc@man.poznan.pl> - conversion of configuration using  ~/.fbpanel/* files to commandline options
+  Rafal Bisingier <ravbc@man.poznan.pl> - conversion of configuration using  ~/.fbpanel/* files to commandline options
   Grzegorz Niewêg³owski <hoppke@dobremiasto.net> - code extraction from fbpanel
   Thomas Rydzynski - added new option 'distance'
   Keegan Carruthers-Smith <keegan.csmith@gmail.com> - fix align 
@@ -83,3 +83,4 @@ Rafal Bisingier <ravbc@man.poznan.pl> - conversion of configuration using  ~/.fb
   Johannes Bittner - primary switch for monitor selection
   Vladimir Murzin  - fixing transparency startup problem
   Corey Richardson - Found some default value fuckup
+  Constantine Verutin - React on changes in monitor setup.
