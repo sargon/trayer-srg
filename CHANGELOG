@@ -1,5 +1,29 @@
 trayer changelog
 
+1.1.6
+* react on monitor setup changes
+
+1.1.5
+* Replace deprecated functions from gdk
+* Fix panel width default value
+* Manual updates
+
+1.1.4
+* Update cmdline help
+* Restore padding functionality
+* Add primary monitor cmdline flag
+
+1.1.3
+* Minimal height restriction 
+* Build process fixes
+
+1.1.2
+* Type fixes.
+
+1.1.1
+* Remove unusable features from legacy code
+* Replace hand written X event handling with gdk functions
+
 1.1
 * multi monitor support
 * add distancefrom parameter
