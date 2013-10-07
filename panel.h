@@ -45,6 +45,7 @@ typedef struct {
     int setdocktype : 1;
     int setstrut : 1;
     int transparent : 1;
+    int on_primary : 1;
     int monitor;
     
     // Import from plugin structure
