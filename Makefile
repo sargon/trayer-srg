@@ -18,7 +18,7 @@ endif
 
 
 TARGET = trayer
-$(TARGET): $(OBJ) 
+$(TARGET): $(OBJ)
 	$(CC) $(LDFLAGS) $(OBJ) -o $@ $(LIBS)
 ifeq (,$(DEVEL))
 	strip $@
@@ -30,10 +30,10 @@ all: $(TARGET)
 clean:
 	$(RM) $(TARGET) $(OBJ) $(DEP) *~
 
-distclean: 
+distclean:
 	rm -f Makefile.config config.h
 
-install: 
+install:
 	install -d $(PREFIX)/bin
 	install -m 755 $(TARGET) $(PREFIX)/bin
 
