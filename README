@@ -67,6 +67,10 @@ TRAYER IN DISTROS
 
   gentoo
     http://packages.gentoo.org/package/x11-misc/trayer-srg
+
+  nixos
+    http://hydra.nixos.org/job/nixpkgs/trunk/trayer.i686-linux/latest
+    http://hydra.nixos.org/job/nixpkgs/trunk/trayer.x86_64-linux/latest
 	
 AUTHORS
   Maciej Delmanowski <harnir@users.berlios.de>
