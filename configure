@@ -1,0 +1,28 @@
+#!/bin/bash
+
+PREFIX=/usr
+
+if [ ! -z "$1" ]; then
+  if [[ "$1" =~ ^--prefix= ]]; then
+    PREFIX=$(echo $1 | cut -d= -f2)
+  else
+    echo "Usage: $0 [--prefix=<path>]"
+    exit 1
+  fi
+fi
+
+if [ -f config.h ]; then
+  echo "overwriting old config.h..."
+fi
+cat > config.h <<EOF
+/* created by ./configure */
+#define PREFIX $PREFIX
+EOF
+
+if [ -f Makefile.config ]; then
+  echo "overwriting old Makefile.config..."
+fi
+cat > Makefile.config <<EOF
+# created by ./configure
+PREFIX = $PREFIX
+EOF
