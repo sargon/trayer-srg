@@ -3,7 +3,7 @@ Installation:
 1. Default way
 Most users (99.99%) should use this way :-)
 
-    ./confugire
+    ./configure
     make
     su -
     make install
