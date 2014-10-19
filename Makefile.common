@@ -16,8 +16,8 @@ endif
 endif
 
 CC ?= gcc
-LIBS = $(shell pkg-config --libs gtk+-2.0 gdk-pixbuf-2.0 gdk-pixbuf-xlib-2.0) -lX11 -L/usr/X11R6/lib  -lXmu
-INCS = $(shell pkg-config --cflags gtk+-2.0 gdk-pixbuf-2.0 gdk-pixbuf-xlib-2.0)
+LIBS = $(shell pkg-config --libs gtk+-2.0 gdk-pixbuf-2.0 gdk-pixbuf-xlib-2.0 x11) 
+INCS = $(shell pkg-config --cflags gtk+-2.0 gdk-pixbuf-2.0 gdk-pixbuf-xlib-2.0 x11)
 CFLAGS ?= -O2 -Wall
 ifneq (,$(DEVEL))
 CFLAGS ?= -g -Wall 
