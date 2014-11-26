@@ -401,7 +401,7 @@ get_net_wm_state(Window win, net_wm_state *nws)
 
 
     ENTER;
-    bzero(nws, sizeof(nws));
+    memset(nws, 0, sizeof(*nws));
     if (!(state = get_xaproperty(win, a_NET_WM_STATE, XA_ATOM, &num3)))
         RET();
 
@@ -442,7 +442,7 @@ get_net_wm_window_type(Window win, net_wm_window_type *nwwt)
 
 
     ENTER;
-    bzero(nwwt, sizeof(nwwt));
+    memset(nwwt, 0, sizeof(*nwwt));
     if (!(state = get_xaproperty(win, a_NET_WM_WINDOW_TYPE, XA_ATOM, &num3)))
         RET();
 
