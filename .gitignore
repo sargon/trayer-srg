@@ -1,2 +1,5 @@
 Makefile.config
 config.h
+*.o
+*.dep
+trayer
