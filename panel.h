@@ -24,17 +24,17 @@ enum { POS_NONE, POS_START, POS_END };
 typedef struct {
 
     GtkWidget *topgwin;           /* main panel window */
-    GdkWindow* topGdkWindow;      // and it parent gdk window  
+    GdkWindow* topGdkWindow;      // and it parent gdk window
     Window topxwin;               /* and it X window   */
     GtkWidget *lbox;              /* primary layout box */
     GtkWidget *box;               /* box that contains all plugins */
     GtkWidget *(*my_box_new) (gboolean, gint);
-    Pixmap xtopbg; 
+    Pixmap xtopbg;
     GdkPixmap *gtopbg;
 
     int alpha;
     guint32 tintcolor;
-    
+
     int ax, ay, aw, ah;  /* actual location and size of a panel */
     int allign, edge, margin;
     int orientation;
@@ -47,15 +47,16 @@ typedef struct {
     int transparent : 1;
     int on_primary : 1;
     int monitor;
-    
+
     // Import from plugin structure
-    gpointer     priv; 
+    gpointer     priv;
     int expand;
     int padding;
+	int lower;
 } panel;
 
 
-typedef struct { 
+typedef struct {
     unsigned int modal : 1;
     unsigned int sticky : 1;
     unsigned int maximized_vert : 1;
@@ -69,7 +70,7 @@ typedef struct {
     unsigned int below : 1;
 } net_wm_state;
 
-typedef struct { 
+typedef struct {
     unsigned int desktop : 1;
     unsigned int dock : 1;
     unsigned int toolbar : 1;
@@ -114,12 +115,12 @@ extern Atom a_NET_WM_WINDOW_TYPE_UTILITY;
 extern Atom a_NET_WM_WINDOW_TYPE_SPLASH;
 extern Atom a_NET_WM_WINDOW_TYPE_DIALOG;
 extern Atom a_NET_WM_WINDOW_TYPE_NORMAL;
-          
+
 extern Atom a_NET_WM_DESKTOP;
 extern Atom a_NET_WM_NAME;
 extern Atom a_NET_WM_STRUT;
 extern Atom a_NET_WM_STRUT_PARTIAL;
 
 extern Atom a_KDE_NET_WM_SYSTEM_TRAY_WINDOW_FOR;
-  
+
 #endif

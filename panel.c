@@ -93,7 +93,7 @@ panel_set_wm_strut(panel *p)
     default:
         ERR("wrong edge %d. strut won't be set\n", p->edge);
         RET();
-    }		
+    }
     DBG("type %d. width %d. from %d to %d\n", i, data[i], data[4 + i*2], data[5 + i*2]);
 
     XChangeProperty(gdk_helper_display(), p->topxwin, a_NET_WM_STRUT_PARTIAL,
@@ -105,7 +105,7 @@ panel_set_wm_strut(panel *p)
     RET();
 }
 
-static GdkFilterReturn 
+static GdkFilterReturn
 panel_wm_events(GdkXEvent *xevent, GdkEvent *event, panel *p)
 {
     Atom at;
@@ -135,7 +135,7 @@ panel_wm_events(GdkXEvent *xevent, GdkEvent *event, panel *p)
  ****************************************************/
 
 
-static gint 
+static gint
 panel_delete_event(GtkWidget * widget, GdkEvent * event, gpointer data)
 {
     ENTER;
@@ -146,7 +146,7 @@ static gint
 panel_destroy_event(GtkWidget * widget, GdkEvent * event, gpointer data)
 {
     ENTER;
-    // TODO need to cleanup 
+    // TODO need to cleanup
     gtk_main_quit();
     RET(FALSE);
 }
@@ -326,7 +326,7 @@ panel_start_gui(panel *p)
 
     gdk_window_stick                 ( p->topGdkWindow);
     gdk_window_set_skip_pager_hint   ( p->topGdkWindow, True );
-    gdk_window_set_skip_taskbar_hint ( p->topGdkWindow, True ); 
+    gdk_window_set_skip_taskbar_hint ( p->topGdkWindow, True );
 
     XSelectInput (gdk_helper_display(), GDK_ROOT_WINDOW(), PropertyChangeMask);
     XSelectInput (gdk_helper_display(), p->topxwin, PropertyChangeMask | FocusChangeMask | StructureNotifyMask);
@@ -336,6 +336,8 @@ panel_start_gui(panel *p)
     gdk_window_move_resize(p->topgwin->window, p->ax, p->ay, p->aw, p->ah);
     if (p->setstrut)
         panel_set_wm_strut(p);
+	if (p->lower)
+		XLowerWindow(gdk_helper_display(), p->topxwin);
 
 
     RET();
@@ -403,8 +405,9 @@ usage()
     ENTER;
     printf("trayer %s - lightweight GTK2+ systray for UNIX desktops\n", version);
     printf("Command line options:\n");
-    printf(" -h  -- print this help and exit:\n");
-    printf(" -v  -- print version and exit:\n");
+    printf(" -h  -- print this help and exit\n");
+    printf(" -v  -- print version and exit\n");
+    printf(" -l  -- lower the window on startup\n");
     printf(" --edge       <left|right|top|bottom|none> (default:bottom) \n");
     printf(" --align      <left|right|center>          (default:center)\n");
     printf(" --margin     <number>                     (default:0)\n");
@@ -417,13 +420,13 @@ usage()
     printf(" --transparent     <true|false>            (default:false)\n");
     printf(" --alpha      <number>                     (default:127)\n");
     printf(" --tint       <int>                        (default:0xFFFFFFFF)\n");
-    printf(" --distance   <number>                     (default:0)\n"); 
+    printf(" --distance   <number>                     (default:0)\n");
     printf(" --distancefrom <left|right|top|bottom>    (default:top) \n");
     printf(" --expand     <false|true>                 (default:true)\n");
     printf(" --padding    <number>                     (default:0)\n");
     printf(" --monitor    <number|primary>             (default:0)\n");
 }
-    
+
 void
 handle_error(Display * d, XErrorEvent * ev)
 {
@@ -441,11 +444,11 @@ main(int argc, char *argv[], char *env[])
     int i;
 
     ENTER;
-    setlocale(LC_CTYPE, ""); 
+    setlocale(LC_CTYPE, "");
     gtk_init(&argc, &argv);
-    XSetLocaleModifiers(""); 
+    XSetLocaleModifiers("");
     XSetErrorHandler((XErrorHandler) handle_error);
-    // resolve xatoms 
+    // resolve xatoms
     resolve_atoms();
 
     p = g_new0(panel, 1);
@@ -473,6 +476,8 @@ main(int argc, char *argv[], char *env[])
         } else if (!strcmp(argv[i], "-v") || !strcmp(argv[i], "--version")) {
             printf("trayer %s\n", version);
             exit(0);
+		} else if (!strcmp(argv[i], "-l")) {
+			p->lower = 1;
         } else if (!strcmp(argv[i], "--edge")) {
             i++;
             if (i == argc) {
