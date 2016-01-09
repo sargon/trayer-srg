@@ -424,6 +424,7 @@ usage()
     printf(" --expand     <false|true>                 (default:true)\n");
     printf(" --padding    <number>                     (default:0)\n");
     printf(" --monitor    <number|primary>             (default:0)\n");
+    printf(" --iconspacing <number>                    (default:0)\n");
 }
 
 void
@@ -461,6 +462,7 @@ main(int argc, char *argv[], char *env[])
     p->setdocktype = 1;
     p->setstrut = 0;
     p->transparent = 0;
+    p->icon_spacing = 0;
     p->alpha = 127;
     p->tintcolor = 0xFFFFFFFF;
     p->xtopbg = None;
@@ -633,6 +635,15 @@ main(int argc, char *argv[], char *env[])
                 } else if (!strcmp(argv[i], "primary")) {
                     p->on_primary = 1;
                 }
+            }
+        } else if (!strcmp(argv[i], "--iconspacing")) {
+            i++;
+            if (i == argc) {
+                ERR( "trayer: missing icon padding parameter value\n");
+                usage();
+                exit(1);
+            } else {
+                p->icon_spacing = atoi(argv[i]);
             }
         } else {
             printf("trayer: unknown option - %s\n", argv[i]);
