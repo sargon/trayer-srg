@@ -58,13 +58,13 @@ OPTIONS
 TRAYER IN DISTROS
 
   debian 
-    git://git.debian.org/git/collab-maint/trayer
+    https://packages.debian.org/source/jessie/trayer
+ 
+  ubuntu
+    http://packages.ubuntu.com/xenial/trayer
   
-  fedora
-    https://github.com/bryanbickford/trayer    
-
   archlinux
-    http://github.com/sargon/trayer-srg  
+    https://aur.archlinux.org/packages/trayer-srg-git/
 
   gentoo
     http://packages.gentoo.org/package/x11-misc/trayer-srg
