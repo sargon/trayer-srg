@@ -34,8 +34,8 @@ distclean:
 	rm -f Makefile.config config.h
 
 install:
-	install -d $(DESTDIR)$(PREFIX)/bin
-	install -m 755 $(TARGET) $(DESTDIR)$(PREFIX)/bin
+	install -d $(PREFIX)/bin
+	install -m 755 $(TARGET) $(PREFIX)/bin
 
 uninstall:
-	rm -f $(DESTDIR)$(PREFIX)/bin/$(TARGET)
+	rm -f $(PREFIX)/bin/$(TARGET)
