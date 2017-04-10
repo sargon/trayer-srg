@@ -53,7 +53,7 @@ OPTIONS
 	--monitor       - define the mointor on which you like trayer to appear, 
                     number of zero to number of monitors minus one, 
                     or the string "primary".
-  --iconspacing   - Space between tray icons in pixels.
+	--iconspacing   - Space between tray icons in pixels.
 
 TRAYER IN DISTROS
 
@@ -91,3 +91,4 @@ AUTHORS
   Constantine Verutin - React on changes in monitor setup.
   Robbie Harwood - Fixup build
   Omar Sandoval  - Fixups
+  Harri Nieminen - Fixup library linking
