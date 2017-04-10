@@ -2,7 +2,6 @@
 #include <unistd.h>
 #include <string.h>
 
-#include <X11/Xmu/WinUtil.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 
 #include "panel.h"

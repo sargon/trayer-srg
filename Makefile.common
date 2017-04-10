@@ -18,8 +18,8 @@ endif
 CC ?= gcc
 PKG_CONFIG ?= pkg-config
 
-LIBS = $(shell $(PKG_CONFIG) --libs gtk+-2.0 gdk-pixbuf-2.0 gdk-pixbuf-xlib-2.0 x11)
-INCS = $(shell $(PKG_CONFIG) --cflags gtk+-2.0 gdk-pixbuf-2.0 gdk-pixbuf-xlib-2.0 x11)
+LIBS = $(shell $(PKG_CONFIG) --libs gtk+-2.0 gdk-pixbuf-2.0 x11)
+INCS = $(shell $(PKG_CONFIG) --cflags gtk+-2.0 gdk-pixbuf-2.0 x11)
 CFLAGS ?= -O2 -Wall
 ifneq (,$(DEVEL))
 CFLAGS ?= -g -Wall 
