@@ -26,10 +26,10 @@ CFLAGS ?= -g -Wall
 endif
 
 %.o: %.c
-	$(CC) $(CFLAGS) $(INCS) -c $<
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(INCS) -c $<
 
 %.dep: %.c
-	$(CC) $(CFLAGS) $(INCS) -MM $< -o $@
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(INCS) -MM $< -o $@
 
 .PHONY: all clean distclean install uninstall
 
