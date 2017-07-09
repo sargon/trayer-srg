@@ -558,7 +558,7 @@ calculate_position(panel *np, int distance,int distancefrom)
 
     if (np->monitor >= gdk_screen_get_n_monitors(screen)) {
         np->monitor = 0;
-        ERR("trayer: monitor parameter isn't valid, reseting value to 0\n");
+        ERR("trayer: monitor parameter isn't valid, resetting value to 0\n");
     }
 
     gdk_screen_get_monitor_geometry(screen,np->monitor,monitorGeometry);
