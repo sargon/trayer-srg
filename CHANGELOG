@@ -1,5 +1,9 @@
 trayer changelog
 
+1.1.8
+* Replace depricated gdk functions
+* Fix position update on screen configuration change
+
 1.1.7
 * Library cleanup
 * Icon Spacing
