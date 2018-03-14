@@ -552,7 +552,7 @@ calculate_position(panel *np, int distance,int distancefrom)
     ENTER;
     
     display = gdk_display_get_default ();
-    screen  = gdk_display_get_screen(display,0);
+    screen  = gdk_display_get_default_screen(display);
 
     monitorGeometry = (GdkRectangle*) malloc(sizeof(GdkRectangle));
 

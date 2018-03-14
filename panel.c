@@ -279,7 +279,7 @@ panel_start_gui(panel *p)
 
     if (p->on_primary) {
         GdkDisplay *display = gdk_display_get_default ();
-        GdkScreen *screen = gdk_display_get_screen(display, 0);
+        GdkScreen *screen = gdk_display_get_default_screen(display);
         g_signal_connect ( screen, "monitors-changed", G_CALLBACK(panel_monitors_changed), (gpointer)p );
         p->monitor = gdk_screen_get_primary_monitor(screen);
 
