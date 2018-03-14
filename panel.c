@@ -247,7 +247,9 @@ static gboolean
 panel_monitors_changed(GdkScreen* s, panel* p)
 {
     ENTER;
-    p->monitor = gdk_screen_get_primary_monitor(s);
+    if ( p->on_primary ) {
+      p->monitor = gdk_screen_get_primary_monitor(s);
+    }
     calculate_position(p, distance,distancefrom);
     gdk_window_move_resize(p->topgwin->window, p->ax, p->ay, p->aw, p->ah);
     if (p->setstrut)
@@ -277,13 +279,15 @@ panel_start_gui(panel *p)
       g_signal_connect (G_OBJECT (p->topgwin), "style-set", G_CALLBACK( panel_style_set), p);
     }
 
+    GdkDisplay *display = gdk_display_get_default ();
+    GdkScreen *screen = gdk_display_get_default_screen(display);
+    g_signal_connect ( screen, "monitors-changed", G_CALLBACK(panel_monitors_changed), (gpointer)p );
+
     if (p->on_primary) {
-        GdkDisplay *display = gdk_display_get_default ();
-        GdkScreen *screen = gdk_display_get_default_screen(display);
-        g_signal_connect ( screen, "monitors-changed", G_CALLBACK(panel_monitors_changed), (gpointer)p );
         p->monitor = gdk_screen_get_primary_monitor(screen);
 
     }
+
     gtk_widget_realize(p->topgwin);
     gdk_window_set_decorations(p->topgwin->window, 0);
     gtk_widget_set_app_paintable(p->topgwin, TRUE);
