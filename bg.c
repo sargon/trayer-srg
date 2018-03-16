@@ -114,14 +114,6 @@ bg_rootbg_changed()
 }
 
 void
-bg_close()
-{
-    ENTER;
-    XFreeGC(dpy, gc);
-    RET();
-}
-
-void
 modify_drawable(GdkDrawable *base, GdkGC *gc, guint32 tintcolor, gint alpha)
 {
     int w, h;
