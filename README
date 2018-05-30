@@ -41,7 +41,7 @@ OPTIONS
 		pixel   - ocupy fixed number of pixels, then 'height' variable 
               holds a number
 	--height		    - height of a panel in pixels
-	--SetDockTpe		- Identify panel window type as dock <true|false>
+	--SetDockType		- Identify panel window type as dock <true|false>
 	--SetPartialStrut	- Reserve panel's space so that it will not be covered by 
                       maximazied windows <true|false>
 	--transparent   - use transparency <true|false>
