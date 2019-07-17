@@ -22,38 +22,38 @@ DESCRIPTION
   project homepage: http://fvwm-crystal.berlios.de/
 
   You can find code of trayer-srg on his github page:
-	http://github.com/sargon/trayer-srg
+    http://github.com/sargon/trayer-srg
 
 OPTIONS
-  -h			        - prints help message and exits
-  -v			        - prints version and exits
-	--edge			    - screen edge to use <left|right|top|bottom>
-	--align			    - alignment <left|center|right>
-	--margin		    - length of margin in pixels
-	--distance		  - space between trayer's window and screen edge
-	--distancefrom  - Specifies which edge to calculate distance from, see above.
-	--widthtype		  - how panel width is calculated:
-    request - follow widgets' size requests. can shrink or grow dynamically
-		pixel   - ocupy fixed number of pixels, then 'width' variable holds a number
-		percent - be 'width' precent of an edge
-	--width			    - width of a panel (not used with --widthtype=request)
-	--heighttype		- how panel height is calcilated:
-		pixel   - ocupy fixed number of pixels, then 'height' variable 
-              holds a number
-	--height		    - height of a panel in pixels
-	--SetDockTpe		- Identify panel window type as dock <true|false>
-	--SetPartialStrut	- Reserve panel's space so that it will not be covered by 
-                      maximazied windows <true|false>
-	--transparent   - use transparency <true|false>
-	--tint			    - color used to "tint" background wallpaper with
-	--alpha			    - pocentage of transparency <0-256>
-	--expand		    - specifies if trayer can accomodate extra space 
-                    or not <true|false>
-	--padding		    - extra space between trayer's window frame and docked icons
-	--monitor       - define the mointor on which you like trayer to appear, 
-                    number of zero to number of monitors minus one, 
-                    or the string "primary".
-	--iconspacing   - Space between tray icons in pixels.
+  -h --help             - prints help message and exits
+  -v --version          - prints version and exits
+     --edge             - screen edge to use <left|right|top|bottom>
+     --align            - alignment <left|center|right>
+     --margin           - length of margin in pixels
+     --distance         - space between trayer's window and screen edge
+     --distancefrom     - Specifies which edge to calculate distance from, see above.
+     --widthtype        - how panel width is calculated:
+         request - follow widgets' size requests. can shrink or grow dynamically
+         pixel   - occupy fixed number of pixels, then 'width' variable holds a number
+         percent - be 'width' precent of an edge
+     --width            - width of a panel (not used with --widthtype=request)
+     --heighttype       - how panel height is calcilated:
+         pixel   - occupy fixed number of pixels, then 'height' variable 
+                   holds a number
+     --height           - height of a panel in pixels
+     --SetDockType      - Identify panel window type as dock <true|false>
+     --SetPartialStrut  - Reserve panel's space so that it will not be covered by 
+                          maximized windows <true|false>
+     --transparent      - use transparency <true|false>
+     --tint             - color used to "tint" background wallpaper with
+     --alpha            - level of transparency <0-255>
+     --expand           - specifies if trayer can accommodate extra space 
+                          or not <true|false>
+     --padding          - extra space between trayer's window frame and docked icons
+     --monitor          - define the monitor on which you like trayer to appear, 
+                          number of zero to number of monitors minus one, 
+                          or the string "primary".
+     --iconspacing      - Space between tray icons in pixels.
 
 TRAYER IN DISTROS
 
@@ -72,7 +72,7 @@ TRAYER IN DISTROS
   nixos
     http://hydra.nixos.org/job/nixpkgs/trunk/trayer.i686-linux/latest
     http://hydra.nixos.org/job/nixpkgs/trunk/trayer.x86_64-linux/latest
-	
+    
 AUTHORS
   Maciej Delmanowski <harnir@users.berlios.de>
   Anatoly Asviyan <aanatoly@users.sf.net> - fbpanel

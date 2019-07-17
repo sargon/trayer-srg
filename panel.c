@@ -464,7 +464,7 @@ main(int argc, char *argv[], char *env[])
     p->heighttype = HEIGHT_PIXEL;
     p->height = PANEL_HEIGHT_DEFAULT;
     p->setdocktype = 1;
-    p->setstrut = 0;
+    p->setstrut = 1;
     p->transparent = 0;
     p->icon_spacing = 0;
     p->alpha = 127;
