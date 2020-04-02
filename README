@@ -46,7 +46,7 @@ OPTIONS
                       maximazied windows <true|false>
 	--transparent   - use transparency <true|false>
 	--tint			    - color used to "tint" background wallpaper with
-	--alpha			    - pocentage of transparency <0-256>
+	--alpha			    - percentage of transparency <0-256>
 	--expand		    - specifies if trayer can accomodate extra space 
                     or not <true|false>
 	--padding		    - extra space between trayer's window frame and docked icons
