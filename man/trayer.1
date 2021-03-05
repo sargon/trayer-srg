@@ -2,14 +2,14 @@
 .SH NAME
   trayer-srg - a lightweight GTK2-based systray for UNIX desktop
 .SH SYNOPSYS
-.B trayer 
+.B trayer
 .B "[
 .I OPTIONS
 .B "]
 .SH DESCRIPTION
 trayer is small program designed to provide systray functionality present in GNOME/KDE desktop enviroments for window managers which doesn't support that function. It's similar to other applications such as 'peksystray' and 'docker'.
-   
-trayer code was extracted from fbpanel application, you can find more about it on it's homepage: 
+
+trayer code was extracted from fbpanel application, you can find more about it on it's homepage:
 .IB http://fbpanel.sourceforge.net/
 
 You can find new versions of trayer and support on FVWM-Crystal project homepage:
@@ -20,27 +20,27 @@ It contains all changes from above versions as far as known.
 Code of trayer-srg can be found on github:
 .IB http://github.com/sargon/trayer-srg
 .SH OPTIONS
-.TP 
-.BR \-h 
-prints help message and exits 
-.TP 
+.TP
+.BR \-h
+prints help message and exits
+.TP
 .BR \-v
 prints version and exits
 .TP
-.BR \--edge " EDGE" 
-Use 
+.BR \--edge " EDGE"
+Use
 .I EDGE
 for orientation. Possible values for
 .I EDGE
-are 
-.BR left, 
+are
+.BR left,
 .BR right,
 .BR top,
 .BR bottom
-or 
+or
 .BR none.
-The default value is 
-.BR bottom. 
+The default value is
+.BR bottom.
 .TP
 .BR \--align " ALIGNMENT"
 Orientation of docked icons inside the trayer panel. Possible values are
@@ -49,32 +49,33 @@ Orientation of docked icons inside the trayer panel. Possible values are
 .BR right,
 or
 .BR none.
-The default value is 
+The default value is
 .BR center.
 .TP
 .BR \--margin " NUM"
-Length of margin in pixels. The default value is 
+Length of margin in pixels. The default value is
 .BR 0.
 .TP
-.BR \--distance " NUM"
-Space between trayer's window and screen edge.
+.BR \--distance " NUM[,NUM"]
+Space between trayer's window and screen edge. If only one value for two edges
+is given, the same value is applied to both edges.
 When set to 0 the option has no effect.
 The default value is
-.BR 0.
+.BR 0,0.
 .TP
-.BR \--distancefrom " EDGE"
-Specifies which edge to calculate distance from, see 
+.BR \--distancefrom " EDGE[,EDGE"]
+Specifies which edges to calculate distance from, see
 .BR --edge.
-The default value is 
-.BR top.
- When 
-.BR --distance 
+The default value is
+.BR top,none.
+ When
+.BR --distance
 is 0 then this option has no effect.
 .TP
 .BR \--widthtype " TYPE"
 Determine how width is calculated. Possible values for
 .I TYPE
-are 
+are
 .BR pixel,
 .BR percent,
 .BR request
@@ -84,15 +85,15 @@ The default value is
 .BR percent.
 .TP
 .BR \--width " NUM"
-Width of a panel. When 
-.BR --widthtype=request 
-this option has no effect. The default value is 
+Width of a panel. When
+.BR --widthtype=request
+this option has no effect. The default value is
 .BR 100.
 .TP
 .BR \--heighttype " TYPE"
-Determine how height is calculated. Possible values for 
+Determine how height is calculated. Possible values for
 .I TYPE
-are 
+are
 .BR pixel,
 .BR request
 or
@@ -102,8 +103,8 @@ The default value is
 .BR pixel.
 .TP
 .BR \--height " NUM"
-Height of a panel. When 
-.BR --heigthtype=request 
+Height of a panel. When
+.BR --heigthtype=request
 this option has no effect. The default value is
 .BR 26.
 .TP
@@ -113,23 +114,23 @@ Identify panel window type as dock. The default value is
 .TP
 .BR \--SetPartialStrut " BOOL"
 Reserve panel's space so that it will not be covered by maximazied windows. The
-default value is 
+default value is
 .BR false.
 .TP
 .BR \--transparent " BOOL"
-Use transparency. Default value is 
-.BR false. 
+Use transparency. Default value is
+.BR false.
 .TP
 .BR \--tint " NUM"
-Color used to "tint" background wallpaper with. 
+Color used to "tint" background wallpaper with.
 .I NUM
 is 32bit width hexadecimal number.
-The default value is 
+The default value is
 .BR 0xFFFFFFFF.
 .TP
 .BR \--alpha " NUM"
 Percentage of transparency.
-.I NUM 
+.I NUM
 should be a value between 0 and 256. The default value is
 .BR 127.
 .TP
@@ -148,7 +149,7 @@ Define the monitor on which you like trayer to appear, number of zero to number
 of monitors minus one, or the string "primary" are valid. The default value is
 .BR 0.
 .SH EXAMPLES
-.LP 
+.LP
 Place trayer to the top right edge of the screen and prevent other fullsize
 windows to overlay it:
 .RS
@@ -172,7 +173,7 @@ code extraction from fbpanel
 .IP "Thomas Rydzynski"
 added new option 'distance'
 .IP "Keegan Carruthers-Smith <keegan.csmith@gmail.com>"
-fix align 
+fix align
 .IP "Yury Akudovich"
 added new option distancefrom option
 .IP "Jens Peter Secher <jps@debian.org>"

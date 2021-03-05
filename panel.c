@@ -19,7 +19,8 @@
 #define VERSION "1.1.6"
 
 static gchar version[] = VERSION;
-int distance=0, distancefrom=DISTANCEFROM_TOP;
+int distance[DISTANCE_MAX_ARRAY_SIZE]={0, 0};
+int distancefrom[DISTANCE_MAX_ARRAY_SIZE]={DISTANCEFROM_TOP, DISTANCEFROM_NONE};
 int expand=1 , padding=0;
 
 
@@ -162,7 +163,7 @@ panel_size_req(GtkWidget *widget, GtkRequisition *req, panel *p)
         p->width = (p->orientation == ORIENT_HORIZ) ? req->width : req->height;
     if (p->heighttype == HEIGHT_REQUEST)
         p->height = (p->orientation == ORIENT_HORIZ) ? req->height : req->width;
-    calculate_position(p, distance,distancefrom);
+    calculate_position(p, distance, distancefrom);
     req->width  = p->aw;
     req->height = p->ah;
     DBG("OUT req=(%d, %d)\n", req->width, req->height);
@@ -179,7 +180,7 @@ panel_size_alloc(GtkWidget *widget, GtkAllocation *a, panel *p)
         p->width = (p->orientation == ORIENT_HORIZ) ? a->width : a->height;
     if (p->heighttype == HEIGHT_REQUEST)
         p->height = (p->orientation == ORIENT_HORIZ) ? a->height : a->width;
-    calculate_position(p, distance,distancefrom);
+    calculate_position(p, distance, distancefrom);
     DBG("pref alloc: size (%d, %d). pos (%d, %d)\n", p->aw, p->ah, p->ax, p->ay);
     if (a->width == p->aw && a->height == p->ah && a->x == p->ax && a->y == p ->ay) {
         DBG("actual coords eq to preffered. just returning\n");
@@ -250,7 +251,7 @@ panel_monitors_changed(GdkScreen* s, panel* p)
     if ( p->on_primary ) {
       p->monitor = gdk_screen_get_primary_monitor(s);
     }
-    calculate_position(p, distance,distancefrom);
+    calculate_position(p, distance, distancefrom);
     gdk_window_move_resize(p->topgwin->window, p->ax, p->ay, p->aw, p->ah);
     if (p->setstrut)
         panel_set_wm_strut(p);
@@ -336,7 +337,7 @@ panel_start_gui(panel *p)
     XSelectInput (gdk_helper_display(), p->topxwin, PropertyChangeMask | FocusChangeMask | StructureNotifyMask);
     gdk_window_add_filter(gdk_get_default_root_window (), (GdkFilterFunc)panel_wm_events, p);
 
-    calculate_position(p, distance,distancefrom);
+    calculate_position(p, distance, distancefrom);
     gdk_window_move_resize(p->topgwin->window, p->ax, p->ay, p->aw, p->ah);
     if (p->setstrut)
         panel_set_wm_strut(p);
@@ -423,8 +424,8 @@ usage()
     printf(" --transparent     <true|false>            (default:false)\n");
     printf(" --alpha      <number>                     (default:127)\n");
     printf(" --tint       <int>                        (default:0xFFFFFFFF)\n");
-    printf(" --distance   <number>                     (default:0)\n");
-    printf(" --distancefrom <left|right|top|bottom>    (default:top) \n");
+    printf(" --distance   <number>[,<number>]          (default:0,0)\n");
+    printf(" --distancefrom <left|right|top|bottom>[,<left|right|top|bottom>] (default:none,none) \n");
     printf(" --expand     <false|true>                 (default:true)\n");
     printf(" --padding    <number>                     (default:0)\n");
     printf(" --monitor    <number|primary>             (default:0)\n");
@@ -445,7 +446,8 @@ handle_error(Display * d, XErrorEvent * ev)
 int
 main(int argc, char *argv[], char *env[])
 {
-    int i;
+    int i, j;
+    char *token;
 
     ENTER;
     setlocale(LC_CTYPE, "");
@@ -598,7 +600,18 @@ main(int argc, char *argv[], char *env[])
                 usage();
                 exit(1);
             } else {
-                distance = atoi(argv[i]);
+                token = strtok(argv[i], ",");
+                for (j = 0; j < DISTANCE_MAX_ARRAY_SIZE; j++) {
+                    if (token != NULL) {
+                        distance[j] = atoi(token);
+                        token = strtok(NULL, ",");
+                    } else
+                        break;
+                }
+                if (j < DISTANCE_MAX_ARRAY_SIZE) {
+                    for (j = j ; j < DISTANCE_MAX_ARRAY_SIZE; j++)
+                        distance[j] = distance[j-1];
+                }
             }
         } else if (!strcmp(argv[i], "--distancefrom")) {
             i++;
@@ -607,7 +620,14 @@ main(int argc, char *argv[], char *env[])
                 usage();
                 exit(1);
             } else {
-                distancefrom = str2num(distancefrom_pair, argv[i], DISTANCEFROM_NONE);
+                token = strtok(argv[i], ",");
+                for (j = 0; j < DISTANCE_MAX_ARRAY_SIZE; j++) {
+                    if (token != NULL) {
+                        distancefrom[j] = str2num(distancefrom_pair, token, DISTANCEFROM_NONE);
+                        token = strtok(NULL, ",");
+                    } else
+                        break;
+                }
             }
         } else if (!strcmp(argv[i], "--expand")) {
             i++;
@@ -666,4 +686,3 @@ main(int argc, char *argv[], char *env[])
 
     exit(0);
 }
-

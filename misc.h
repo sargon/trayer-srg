@@ -48,7 +48,7 @@ int get_wm_state (Window win);
 void get_net_wm_state(Window win, net_wm_state *nws);
 void get_net_wm_window_type(Window win, net_wm_window_type *nwwt);
 
-void calculate_position(panel *np, int distance,int distancefrom);
+void calculate_position(panel *np, int *distance,int *distancefrom);
 gchar *expand_tilda(gchar *file);
 GtkWidget *gtk_image_new_from_file_scaled(const gchar *file, gint width, gint height);
 void get_button_spacing(GtkRequisition *req, GtkContainer *parent, gchar *name);
