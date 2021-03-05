@@ -411,7 +411,7 @@ get_net_wm_state(Window win, net_wm_state *nws)
             DBG("NET_WM_STATE_SKIP_PAGER ");
             nws->skip_pager = 1;
         } else if (state[num3] == a_NET_WM_STATE_SKIP_TASKBAR) {
-            DBG( "NET_WM_STATE_SKIP_TASKBAR ");	
+            DBG( "NET_WM_STATE_SKIP_TASKBAR ");
 	    nws->skip_taskbar = 1;
 	} else if (state[num3] == a_NET_WM_STATE_STICKY) {
             DBG( "NET_WM_STATE_STICKY ");
@@ -452,7 +452,7 @@ get_net_wm_window_type(Window win, net_wm_window_type *nwwt)
             DBG("NET_WM_WINDOW_TYPE_DESKTOP ");
             nwwt->desktop = 1;
         } else if (state[num3] == a_NET_WM_WINDOW_TYPE_DOCK) {
-            DBG( "NET_WM_WINDOW_TYPE_DOCK ");	
+            DBG( "NET_WM_WINDOW_TYPE_DOCK ");
 	    nwwt->dock = 1;
 	} else if (state[num3] == a_NET_WM_WINDOW_TYPE_TOOLBAR) {
             DBG( "NET_WM_WINDOW_TYPE_TOOLBAR ");
@@ -542,15 +542,15 @@ calculate_width(int scrw, int wtype, int allign, int margin,
 
 
 void
-calculate_position(panel *np, int distance,int distancefrom)
+calculate_position(panel *np, int *distance,int *distancefrom)
 {
-    int sswidth, ssheight, minx, miny, distancex, distancey;
+    int sswidth, ssheight, minx, miny, distancex=0, distancey=0, i;
     GdkScreen *screen;
     GdkDisplay *display;
     GdkRectangle *monitorGeometry;
 
     ENTER;
-    
+
     display = gdk_display_get_default ();
     screen  = gdk_display_get_default_screen(display);
 
@@ -562,22 +562,33 @@ calculate_position(panel *np, int distance,int distancefrom)
     }
 
     gdk_screen_get_monitor_geometry(screen,np->monitor,monitorGeometry);
-    
-    sswidth  = monitorGeometry->width; 
+
+    sswidth  = monitorGeometry->width;
     ssheight = monitorGeometry->height;
 
     minx = monitorGeometry->x;
     miny = monitorGeometry->y;
 
     free(monitorGeometry);
-    
-    if (distancefrom == DISTANCEFROM_TOP || distancefrom == DISTANCEFROM_BOTTOM) {
-        distancex = 0;
-        distancey = (distancefrom == DISTANCEFROM_TOP) ? distance : -distance;
-    } else {
-        distancex = (distancefrom == DISTANCEFROM_LEFT) ? distance : -distance;
-        distancey = 0;
+
+    for (i = 0; i < DISTANCE_MAX_ARRAY_SIZE; i++) {
+        switch (distancefrom[i]) {
+            case DISTANCEFROM_TOP:
+                distancey = distance[i];
+                break;
+            case DISTANCEFROM_BOTTOM:
+                distancey = -distance[i];
+                break;
+            case DISTANCEFROM_LEFT:
+                distancex = distance[i];
+                break;
+            case DISTANCEFROM_RIGHT:
+                distancex = -distance[i];
+                break;
+        }
     }
+
+    DBG("x value: %d\ty value: %d\n", distancex, distancey);
 
     if (np->edge == EDGE_TOP || np->edge == EDGE_BOTTOM) {
         np->aw = np->width;
@@ -686,10 +697,10 @@ gtk_image_new_from_file_scaled(const gchar *file, gint width,
     GtkWidget *img;
 
     ENTER;
-    if (g_file_test(file, G_FILE_TEST_EXISTS)) {		
+    if (g_file_test(file, G_FILE_TEST_EXISTS)) {
         GError *err = NULL;
         GdkPixbuf *pb;
-		
+
         pb = gdk_pixbuf_new_from_file(file, &err);
         if (err || !pb) {
             g_error_free(err);
@@ -698,9 +709,9 @@ gtk_image_new_from_file_scaled(const gchar *file, gint width,
 
             pb_scaled = gdk_pixbuf_scale_simple(pb, width, height,
                   GDK_INTERP_BILINEAR);
-		
-            img = gtk_image_new_from_pixbuf(pb_scaled);			
-		
+
+            img = gtk_image_new_from_pixbuf(pb_scaled);
+
             g_object_unref(pb);
             g_object_unref(pb_scaled);
 
@@ -737,7 +748,3 @@ get_button_spacing(GtkRequisition *req, GtkContainer *parent, gchar *name)
     gtk_widget_destroy(b);
     RET();
 }
-
-
-
-
