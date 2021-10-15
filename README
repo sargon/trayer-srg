@@ -77,7 +77,7 @@ AUTHORS
   Maciej Delmanowski <harnir@users.berlios.de>
   Anatoly Asviyan <aanatoly@users.sf.net> - fbpanel
   Rafal Bisingier <ravbc@man.poznan.pl> - conversion of configuration using  ~/.fbpanel/* files to commandline options
-  Grzegorz Niewêg³owski <hoppke@dobremiasto.net> - code extraction from fbpanel
+  Grzegorz Niewęgłowski <hoppke@dobremiasto.net> - code extraction from fbpanel
   Thomas Rydzynski - added new option 'distance'
   Keegan Carruthers-Smith <keegan.csmith@gmail.com> - fix align 
   Yury Akudovich - added new option distancefrom option
