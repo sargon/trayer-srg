@@ -3,11 +3,11 @@
 NAME
         trayer-srg is a lightweight GTK2-based systray for UNIX desktop
 
-SYNOPSYS
+SYNOPSIS
         trayer [OPTION]...
 
 DESCRIPTION
-  trayer-srg was forked from trayer in january 2010 to add some
+  trayer-srg was forked from trayer in January 2010 to add some
   fancy features and clean up code.
  
   trayer is small program designed to provide systray functionality present
@@ -15,13 +15,13 @@ DESCRIPTION
   support that function. It's similar to other applications such as
   'peksystray' and 'docker'.
    
-  trayer code was extracted from fbpanel application, you can find more
+  trayer code was extracted from fbpanel application. You can find more
   about it on it's homepage: http://fbpanel.sourceforge.net/
 
   You can find new versions of trayer and support on FVWM-Crystal
   project homepage: http://fvwm-crystal.berlios.de/
 
-  You can find code of trayer-srg on his github page:
+  You can find code of trayer-srg on its github page:
 	http://github.com/sargon/trayer-srg
 
 OPTIONS
@@ -58,7 +58,7 @@ OPTIONS
 TRAYER IN DISTROS
 
   debian 
-    https://packages.debian.org/source/jessie/trayer
+    https://packages.debian.org/source/trayer
  
   ubuntu
     http://packages.ubuntu.com/xenial/trayer
