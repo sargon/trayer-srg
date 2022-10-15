@@ -3,11 +3,66 @@
   trayer-srg - a lightweight GTK2-based systray for UNIX desktop
 .SH SYNOPSYS
 .B trayer
-.B "[
-.I OPTIONS
-.B "]
+.\"
+.RB [\| \-\-edge
+.RI \| left \||\| right \||\| top \||\| bottom \||\| none \|]
+.\"
+.RB [\| \-\-align
+.RI \| left \||\| right \||\| center \|]
+.\"
+.RB [\| \-\-margin
+.RI \| <size> \|]
+.\"
+.RB [\| \-\-widthtype
+.RI \| request \||\| pixel \||\| percent
+.RI \|]
+.\"
+.RB [\| \-\-width
+.RI \| <size> \|]
+.\"
+.RB [\| \-\-heighttype
+.RI \| <pixel> \|]
+.\"
+.RB [\| \-\-height
+.RI \| <size> \|]
+.\"
+.RB [\| \-\-SetDockType
+.RI \| true \||\| false \|]
+.\"
+.RB [\| \-\-SetPartialStrut
+.RI \| true \||\| false \|]
+.\"
+.RB [\| \-\-transparent
+.RI \| true \||\| false \|]
+.\"
+.RB [\| \-\-alpha
+.RI \| <value> \|]
+.\"
+.RB [\| \-\-tint
+.RI \| <color> \|]
+.\"
+.RB [\| \-\-distance
+.RI \| <length> \|]
+.\"
+.RB [\| \-\-distancefrom
+.RI \| left \||\| right \||\| top \||\| bottom \||\| none \|]
+.\"
+.RB [\| \-\-expand
+.RI \| true \||\| false \|]
+.\"
+.RB [\| \-\-padding
+.RI \| <size> \|]
+.\"
 .SH DESCRIPTION
-trayer is small program designed to provide systray functionality present in GNOME/KDE desktop enviroments for window managers which doesn't support that function. It's similar to other applications such as 'peksystray' and 'docker'.
+
+trayer is small program designed to provide systray functionality present in
+.B GNOME
+/
+.B KDE
+desktop environments for window managers which doesn't support that
+function. It's similar to other applications such as
+.B peksystray
+and \fBdocker\fP.
 
 trayer code was extracted from fbpanel application, you can find more about it on it's homepage:
 .IB http://fbpanel.sourceforge.net/
@@ -15,19 +70,19 @@ trayer code was extracted from fbpanel application, you can find more about it o
 You can find new versions of trayer and support on FVWM-Crystal project homepage:
 .IB http://fvwm-crystal.berlios.de/
 
-trayer-srg was forked from trayer in january 2010 to add some fancy features and clean up code.
+trayer-srg was forked from trayer in January 2010 to add some fancy features and clean up code.
 It contains all changes from above versions as far as known.
 Code of trayer-srg can be found on github:
 .IB http://github.com/sargon/trayer-srg
 .SH OPTIONS
 .TP
-.BR \-h
+.B \-h, \-\-help
 prints help message and exits
 .TP
-.BR \-v
+.B \-v, \-\-version
 prints version and exits
 .TP
-.BR \--edge " EDGE"
+\fB\-\-edge\fP \fI<edge>\fP
 Use
 .I EDGE
 for orientation. Possible values for
@@ -42,7 +97,7 @@ or
 The default value is
 .BR bottom.
 .TP
-.BR \--align " ALIGNMENT"
+\fB\-\-align\fP \fI<alignment>\fP
 Orientation of docked icons inside the trayer panel. Possible values are
 .BR left,
 .BR center,
@@ -52,100 +107,120 @@ or
 The default value is
 .BR center.
 .TP
-.BR \--margin " NUM"
+\fB\-\-margin\fP \fI<size>\fP
 Length of margin in pixels. The default value is
 .BR 0.
 .TP
-.BR \--distance " NUM[,NUM"]
-Space between trayer's window and screen edge. If only one value for two edges
-is given, the same value is applied to both edges.
+.TP
+\fB\-\-distance\fP \fI<length>\fP[,\fI<length>\fP]
+Space between trayer's window and screen edge (in pixels). If only one value for two edges
+-is given, the same value is applied to both edges.
 When set to 0 the option has no effect.
 The default value is
-.BR 0,0.
+.BR 0.
 .TP
-.BR \--distancefrom " EDGE[,EDGE"]
+\fB\-\-distancefrom\fP \fI<edge>\fP[,\fI<edge>\fP]
 Specifies which edges to calculate distance from, see
-.BR --edge.
+.BR \-\-edge.
 The default value is
-.BR top,none.
+.BR top.
  When
-.BR --distance
-is 0 then this option has no effect.
+.BR \-\-distance
+is 0 this option has no effect.
 .TP
-.BR \--widthtype " TYPE"
-Determine how width is calculated. Possible values for
-.I TYPE
-are
-.BR pixel,
-.BR percent,
-.BR request
-or
-.BR none.
-The default value is
-.BR percent.
+\fB\-\-widthtype\fB \fIrequest\fP\||\|\fIpixel\fP\||\|\fIpercent\fP\||\|\fInone\fP
+Determine how width is calculated.
+.RS
 .TP
-.BR \--width " NUM"
+\fIrequest\fP
+Follow application icons' size, so trayer may shrink or expand dynamically.
+
+.TP
+\fIpixel\fP
+Set a fixed size, given with \fB\-\-width\fP option in pixels.
+
+.TP
+\fIpercent\fP
+Set a fixed size, given with \fB\-\-width\fP option in percentage of a length of
+screen edge.
+
+.TP
+\fInone\fP
+.TP
+The default value is \fBpercent\fP.
+.RE
+.TP
+\fB\-\-width\fP \fI<size>\fP
 Width of a panel. When
-.BR --widthtype=request
+.BR \-\-widthtype=request
 this option has no effect. The default value is
 .BR 100.
 .TP
-.BR \--heighttype " TYPE"
-Determine how height is calculated. Possible values for
-.I TYPE
-are
-.BR pixel,
-.BR request
-or
-.BR none.
-
-The default value is
-.BR pixel.
+\fB\-\-heighttype\fP \fIrequest\fP\||\|\fIpixel\fP\||\|\fIpercent\fP\||\|\fInone\fP
+Determine how height is calculated.
+.RS
 .TP
-.BR \--height " NUM"
-Height of a panel. When
-.BR --heigthtype=request
+\fIrequest\fP
+Follow application icons' size, so trayer may shrink or expand dynamically.
+
+.TP
+\fIpixel\fP
+Set a fixed size, given with \fB\-\-height\fP option in pixels.
+
+.TP
+\fIpercent\fP
+Set a fixed size, given with \fB\-\-height\fP option in percentage of a length of screen edge.
+
+.TP
+\fInone\fP
+.TP
+The default value is \fBpixel\fP.
+.RE
+.TP
+\fB\-\-height\fP \fI<size>\fP
+Height of trayer's window. When
+.BR \-\-heigthtype=request
 this option has no effect. The default value is
 .BR 26.
 .TP
-.BR \--SetDockTpe " BOOL"
+\fB\-\-SetDockType\fP \fItrue\fP\||\|\fIfalse\fP
 Identify panel window type as dock. The default value is
 .BR true.
 .TP
-.BR \--SetPartialStrut " BOOL"
-Reserve panel's space so that it will not be covered by maximazied windows. The
+\fB\-\-SetPartialStrut\fP \fItrue\fP\||\|\fIfalse\fP
+Reserve panel space so that it will not be covered by maximized windows. The
 default value is
 .BR false.
 .TP
-.BR \--transparent " BOOL"
-Use transparency. Default value is
+\fB\-\-transparent\fP \fItrue\fP\||\|\fIfalse\fP
+Use transparency. The default value is
 .BR false.
 .TP
-.BR \--tint " NUM"
-Color used to "tint" background wallpaper with.
-.I NUM
-is 32bit width hexadecimal number.
+\fB\-\-tint\fP \fI<color>\fP
+Color used to "tint" transparent background. Color is given as a 24-bit C
+hexadecimal integer, for example: 0xff0000 is red, 0xff8800 is orange and
+0x00ff00 is green.
 The default value is
 .BR 0xFFFFFFFF.
 .TP
-.BR \--alpha " NUM"
-Percentage of transparency.
-.I NUM
-should be a value between 0 and 256. The default value is
+\fB\-\-alpha\fP \fI<value>\fP
+Percentage of transparency (0 \- nontransparent, 255 \- fully transparent).
+.I value
+should be a value between 0 and 255. The default value is
 .BR 127.
 .TP
-.BR \--expand " BOOL"
-Specifies if trayer can accomodate extra space or not <true|false>. The default
+\fB\-\-expand\fP \fItrue\fP\||\|\fIfalse\fP
+Specifies if trayer can accommodate extra space or not. The default
 value is
 .BR true.
 .TP
-.BR \--padding " NUM"
+\fB \-\-padding\fP \fI<size>\fP
 Number of extra pixel space between trayer's window frame and docked icons. The
 default value is
 .BR 0.
 .TP
-.BR \--monitor " NUM|STRING"
-Define the monitor on which you like trayer to appear, number of zero to number
+.BR \-\-monitor\fP \fI<monitor>\fP
+Define the monitor on which you like trayer to appear. Number of zero to number
 of monitors minus one, or the string "primary" are valid. The default value is
 .BR 0.
 .SH EXAMPLES
