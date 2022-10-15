@@ -1,7 +1,7 @@
 .TH TRAYER-SRG 1 LOCAL
 .SH NAME
-  trayer-srg - a lightweight GTK2-based systray for UNIX desktop
-.SH SYNOPSYS
+  trayer-srg \- a lightweight GTK2\-based systray for UNIX desktop
+.SH SYNOPSIS
 .B trayer
 .B "[
 .I OPTIONS
@@ -15,7 +15,7 @@ trayer code was extracted from fbpanel application, you can find more about it o
 You can find new versions of trayer and support on FVWM-Crystal project homepage:
 .IB http://fvwm-crystal.berlios.de/
 
-trayer-srg was forked from trayer in january 2010 to add some fancy features and clean up code.
+trayer-srg was forked from trayer in January 2010 to add some fancy features and clean up code.
 It contains all changes from above versions as far as known.
 Code of trayer-srg can be found on github:
 .IB http://github.com/sargon/trayer-srg
@@ -154,17 +154,19 @@ Place trayer to the top right edge of the screen and prevent other fullsize
 windows to overlay it:
 .RS
 .nf
-\f8trayer trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --transparent true\fP
+  trayer trayer --edge top --align right --SetDockType true \\
+      --SetPartialStrut true --expand true --transparent true
 .fi
 .RE
 .SH BUGS
 Report bugs to the issue tracker:
 .I https://github.com/sargon/trayer-srg/issues
 .SH CONTRIBUTORS
-  Following people are or has been involved in development of trayer-srg:
+The following people are or have been involved in the development of
+trayer-srg:
 
 .IP "Maciej Delmanowski <harnir@users.berlios.de>"
-.IP "Anatoly Asviyan <aanatoly@users.sf.net>
+.IP "Anatoly Asviyan <aanatoly@users.sf.net>"
 fbpanel
 .IP "Rafal Bisingier <ravbc@man.poznan.pl>"
 conversion of configuration using  ~/.fbpanel/* files to commandline options
@@ -188,10 +190,14 @@ fix build problems, improvements cmdline parameter handling
 primary switch for monitor selection
 .IP "Vladimir Murzin <murzin.v@gmail.com>"
 fixing transparency startup problem
-.IP "Corey Richardson <corey@octayn.net>" Found some default value fuckup
-.IP "Constantine Verutin" React on changes in monitor setup.
-.IP "Robbie Harwood" Fixup build
-.IP "Omar Sandoval" Fixups
+.IP "Corey Richardson <corey@octayn.net>"
+Found some default value fuckup
+.IP "Constantine Verutin"
+React on changes in monitor setup.
+.IP "Robbie Harwood"
+Fixup build
+.IP "Omar Sandoval"
+Fixups
 
 .SH AUTHOR
   This man page is written by Daniel Ehlers.
