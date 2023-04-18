@@ -9,12 +9,12 @@ SYNOPSYS
 DESCRIPTION
   trayer-srg was forked from trayer in january 2010 to add some
   fancy features and clean up code.
- 
+
   trayer is small program designed to provide systray functionality present
   in GNOME/KDE desktop enviroments for window managers which doesn't
   support that function. It's similar to other applications such as
   'peksystray' and 'docker'.
-   
+
   trayer code was extracted from fbpanel application, you can find more
   about it on it's homepage: http://fbpanel.sourceforge.net/
 
@@ -38,31 +38,32 @@ OPTIONS
 		percent - be 'width' precent of an edge
 	--width			    - width of a panel (not used with --widthtype=request)
 	--heighttype		- how panel height is calcilated:
-		pixel   - ocupy fixed number of pixels, then 'height' variable 
+		pixel   - ocupy fixed number of pixels, then 'height' variable
               holds a number
 	--height		    - height of a panel in pixels
 	--SetDockType		- Identify panel window type as dock <true|false>
-	--SetPartialStrut	- Reserve panel's space so that it will not be covered by 
+	--SetPartialStrut	- Reserve panel's space so that it will not be covered by
                       maximazied windows <true|false>
 	--transparent   - use transparency <true|false>
 	--tint			    - color used to "tint" background wallpaper with
 	--alpha			    - percentage of transparency <0-256>
-	--expand		    - specifies if trayer can accomodate extra space 
+	--expand		    - specifies if trayer can accomodate extra space
                     or not <true|false>
 	--padding		    - extra space between trayer's window frame and docked icons
-	--monitor       - define the mointor on which you like trayer to appear, 
-                    number of zero to number of monitors minus one, 
+	--monitor       - define the mointor on which you like trayer to appear,
+                    number of zero to number of monitors minus one,
                     or the string "primary".
 	--iconspacing   - Space between tray icons in pixels.
+	--iconsize      - Size of the tray icons.
 
 TRAYER IN DISTROS
 
-  debian 
+  debian
     https://packages.debian.org/source/jessie/trayer
- 
+
   ubuntu
     http://packages.ubuntu.com/xenial/trayer
-  
+
   archlinux
     https://aur.archlinux.org/packages/trayer-srg-git/
 
@@ -72,14 +73,14 @@ TRAYER IN DISTROS
   nixos
     http://hydra.nixos.org/job/nixpkgs/trunk/trayer.i686-linux/latest
     http://hydra.nixos.org/job/nixpkgs/trunk/trayer.x86_64-linux/latest
-	
+
 AUTHORS
   Maciej Delmanowski <harnir@users.berlios.de>
   Anatoly Asviyan <aanatoly@users.sf.net> - fbpanel
   Rafal Bisingier <ravbc@man.poznan.pl> - conversion of configuration using  ~/.fbpanel/* files to commandline options
   Grzegorz Niewęgłowski <hoppke@dobremiasto.net> - code extraction from fbpanel
   Thomas Rydzynski - added new option 'distance'
-  Keegan Carruthers-Smith <keegan.csmith@gmail.com> - fix align 
+  Keegan Carruthers-Smith <keegan.csmith@gmail.com> - fix align
   Yury Akudovich - added new option distancefrom option
   Jens Peter Secher <jps@debian.org> - various (debian trayer fork)
   Daniel Ehlers - multi monitor support, code cleanup

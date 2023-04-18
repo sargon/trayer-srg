@@ -469,6 +469,7 @@ main(int argc, char *argv[], char *env[])
     p->setstrut = 0;
     p->transparent = 0;
     p->icon_spacing = 0;
+    p->icon_size = 0;
     p->alpha = 127;
     p->tintcolor = 0xFFFFFFFF;
     p->xtopbg = None;
@@ -668,6 +669,15 @@ main(int argc, char *argv[], char *env[])
                 exit(1);
             } else {
                 p->icon_spacing = atoi(argv[i]);
+            }
+        } else if (!strcmp(argv[i], "--iconsize")) {
+            i++;
+            if (i == argc) {
+                ERR( "trayer: missing icon size parameter value\n");
+                usage();
+                exit(1);
+            } else {
+                p->icon_size = atoi(argv[i]);
             }
         } else {
             printf("trayer: unknown option - %s\n", argv[i]);

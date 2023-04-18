@@ -49,6 +49,7 @@ typedef struct {
     int on_primary : 1;
     int monitor;
     int icon_spacing;
+    int icon_size;
 
     // Import from plugin structure
     gpointer     priv;
