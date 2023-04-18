@@ -21,15 +21,25 @@ typedef struct {
     GtkWidget *box;
     /////
     EggTrayManager *tray_manager;
-    
+
 } tray;
 
+typedef struct {
+    GtkWidget *box;
+    int icon_size;
+} TrayAddedData;
+
 static void
-tray_added (EggTrayManager *manager, GtkWidget *icon, void *data)
+tray_added (EggTrayManager *manager, GtkWidget *icon, TrayAddedData *data)
 {
-    GtkWidget *box = (GtkWidget *)data;
+    GtkWidget *box = (GtkWidget *)data->box;
 
     gtk_box_pack_end (GTK_BOX (box), icon, FALSE, FALSE, 0);
+
+    if (data->icon_size > 0) {
+        gtk_widget_set_size_request(icon, data->icon_size, data->icon_size);
+    }
+
     gtk_widget_show (icon);
 }
 
@@ -45,9 +55,9 @@ message_sent (EggTrayManager *manager, GtkWidget *icon, const char *text, glong 
 {
     /* FIXME multihead */
     int x, y;
-    
+
     gdk_window_get_origin (icon->window, &x, &y);
-  
+
     fixed_tip_show (0, x, y, FALSE, gdk_screen_height () - 50, text);
 }
 
@@ -55,7 +65,7 @@ static void
 message_cancelled (EggTrayManager *manager, GtkWidget *icon, glong id,
                    void *data)
 {
-  
+
 }
 
 void
@@ -77,9 +87,9 @@ tray_constructor(panel *p)
 {
     tray *tr;
     GdkScreen *screen;
-    
+
     ENTER;
-    
+
     tr = g_new0(tray, 1);
     g_return_val_if_fail(tr != NULL, 0);
     p->priv = tr;
@@ -89,9 +99,9 @@ tray_constructor(panel *p)
     gtk_box_set_spacing(GTK_BOX(tr->box), p->icon_spacing);
     gtk_container_add (GTK_CONTAINER (tr->mainw), tr->box);
     gtk_container_add(GTK_CONTAINER(p->box), tr->mainw);
-    
+
     screen = gtk_widget_get_screen (GTK_WIDGET (p->topgwin));
-    
+
     if (egg_tray_manager_check_running(screen)) {
         ERR("another systray already running\n");
         RET(1);
@@ -100,17 +110,21 @@ tray_constructor(panel *p)
 
     if (!egg_tray_manager_manage_screen (tr->tray_manager, screen))
         g_printerr ("System tray didn't get the system tray manager selection\n");
-    
-    g_signal_connect (tr->tray_manager, "tray_icon_added",
-          G_CALLBACK (tray_added), tr->box);
+
+    TrayAddedData *tray_added_data = g_malloc0(sizeof(TrayAddedData));
+    tray_added_data->box = tr->box;
+    tray_added_data->icon_size = p->icon_size;
+
+    g_signal_connect_data (tr->tray_manager, "tray_icon_added",
+          G_CALLBACK (tray_added), tray_added_data, (GClosureNotify)g_free, 0);
     g_signal_connect (tr->tray_manager, "tray_icon_removed",
           G_CALLBACK (tray_removed), tr->box);
     g_signal_connect (tr->tray_manager, "message_sent",
           G_CALLBACK (message_sent), tr->box);
     g_signal_connect (tr->tray_manager, "message_cancelled",
           G_CALLBACK (message_cancelled), tr->box);
-    
-    
+
+
     RET(1);
 
 }
